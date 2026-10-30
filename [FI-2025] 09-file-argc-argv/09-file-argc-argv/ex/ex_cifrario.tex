@@ -1,0 +1,23 @@
+\begin{Exercise}[label={ex:cifrario}]
+    Si scriva un programma che decifra o cifra un file di testo applicando uno scorrimento ai caratteri alfabetici.
+    Il programma deve accettare i parametri \emph{in qualsiasi ordine} tramite dei flag da linea di comando:
+    \begin{itemize}
+        \item \texttt{-i <inputfile>} : specifica il file di input
+        \item \texttt{-o <outputfile>} : specifica il file di output
+        \item \texttt{-k <shift>} : specifica la chiave
+        \item \texttt{-d} : decifra il file (se non presente, cifra)
+    \end{itemize}
+
+    \textbf{Esempio:}
+    \begin{lstlisting}[style=console]
+        # Cifra il file msg.txt con chiave 3 e salva il risultato in cif.txt
+        ./programma -i msg.txt -o cif.txt -k 3
+        
+        # Decifra il file cif.txt con chiave 5 e salva il risultato in msg.txt
+        ./programma -k 5 -d -o msg.txt -i cif.txt
+    \end{lstlisting}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:cifrario}]
+  	\lstinputlisting[style=cstylesmall]{src/cifrario.c}
+\end{Answer}

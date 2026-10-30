@@ -1,0 +1,26 @@
+\begin{Exercise}[label={ex:ms}]
+    Utilizzando 8 bit, rappresentare il numero decimale $-105_{10}$ in Modulo e Segno (MS).
+\end{Exercise}
+
+\begin{Answer}[ref={ex:ms}]
+    Il numero è negativo, quindi il bit di segno sarà 1.
+    Calcoliamo con i restanti 7 bit il valore assoluto, $|-105| = 105_{10}$:
+    
+    \begin{center}
+    \begin{tabular}{r|r}
+        \multicolumn{2}{c}{2} \\
+        105 & 1 \\
+        52 & 0 \\
+        26 & 0 \\
+        13 & 1 \\
+        6 & 0 \\
+        3 & 1 \\
+        1 & 1 \\
+        0 &
+    \end{tabular}
+    \end{center}
+
+    $105_{10} = 1101001_2$
+    
+    Unendo il bit di segno al valore assoluto convertito in base due ottienamo come risultato finale $-105_{10} = 11101001_{2\text{MS}}$
+\end{Answer}

@@ -1,0 +1,22 @@
+\begin{Exercise}[label={ex:sottrazione_underflow_final_v3}]
+    Eseguire la sottrazione binaria $A - B$, dove $A = (00110101)_2$ e $B = (01110000)_2$.
+    Assumendo una rappresentazione a 8 bit, determinare il risultato e spiegare se si verifica una condizione di \textbf{underflow}.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:sottrazione_underflow_final_v3}]
+    
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{ccccccccccc}
+        & & 1 & 1 & 0 & 0 & 0 & 0 & 0 & \\ % Riga dei prestiti (B_in)
+        & & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 1 & $-$ \\ % Minuendo A
+        & & 0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & = \\ % Sottraendo B
+        \hline
+        & & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 1 & \\ % Risultato S
+    \end{tabular}
+    \end{table}
+
+    Il settimo bit necessita di un prestito per completare l'operazione. Il prestito verrà richiesto all'ottavo che essendo 0 non può soddisfare, quindi bisognerà "scalare" ancora più a sinistra, ma non abbiamo più alcun bit disponibile. Questo significa che il risultato non può essere rappresentato come un numero positivo a 8 bit: siamo andati in underflow.
+    
+    Il risultato binario $(11001001)_2$ è un valore errato in questo contesto.
+\end{Answer}

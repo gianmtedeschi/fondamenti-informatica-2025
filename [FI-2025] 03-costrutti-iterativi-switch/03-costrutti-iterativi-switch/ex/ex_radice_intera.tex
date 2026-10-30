@@ -1,0 +1,16 @@
+\begin{Exercise}[label={ex:radice}]
+  Scrivere un programma che dato un numero positivo ne restituisca la radice intera
+\end{Exercise}
+
+\begin{Answer}[ref={ex:radice}]
+	Abbiamo già visto in un'esercitazione precedente lo pseudocodice per questo algoritmo.
+	
+	Iniziamo con la soluzione utilizzando il costrutto \texttt{while}
+  \lstinputlisting[style=cstyle]{src/radice_intera1.c}
+
+	Alternativamente si può utilizzare anche il ciclo \texttt{for}
+	\lstinputlisting[style=cstyle]{src/radice_intera2.c}
+
+	\paragraph{Attenzione: }
+			In questa soluzione il ciclo non è vuoto, ma semplicemente l'unica operazione è il decremento della variabile che viene eseguito nella terza espressione del ciclo \texttt{for}
+\end{Answer}

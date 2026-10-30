@@ -1,0 +1,109 @@
+\documentclass[oneside]{scrbook}
+
+\input{../preamble.tex}
+\addtocounter{chapter}{2}
+
+\begin{document}
+
+\chapter{Costrutti \texttt{while}, \texttt{for} e \texttt{switch}}
+
+Questa dispensa propone esercizi sulla scrittura di algoritmi, in linguaggio C, utili alla comprensione dei costrutti \texttt{while}, \texttt{for} e \texttt{switch}.
+
+I costrutti per costruire cicli in C sono il \texttt{while}, la variante \texttt{do...while} e il \texttt{for}.
+
+\begin{lstlisting}[style=cstyle]
+  inizializzazione; //opzionale
+
+  while (condizione) {
+    corpo;
+
+    incremento; //opzionale
+  }
+\end{lstlisting}
+
+La \texttt{condizione} \`e valutata prima di ogni iterazione, inclusa la prima; quindi il corpo del ciclo (e quindi anche l'eventuale istruzione di \texttt{incremento}) potrebbero non eseguire mai, nel caso in cui la condizione sia falsa dall'inizio.
+
+\begin{lstlisting}[style=cstyle]
+  inizializzazione; //opzionale
+
+  do {
+    corpo;
+
+    incremento; //opzionale
+  } while (condizione);
+\end{lstlisting}
+
+Invece, nella variante \texttt{do...while}, il corpo e l'eventuale istruzione di incremento sono eseguiti almeno una volta prima di valutare la condizione.
+
+Il \texttt{for} è equivalente, ma ha una sintassi più compatta:
+
+\begin{lstlisting}[style=cstyle]
+  for (inizializzazione; condizione; incremento) {
+    corpo;
+  }
+\end{lstlisting}
+
+Si noti che le parentesi sono necessarie solo nel caso di corpo con più di un'istruzione. Inoltre, l'espressione di inizializzazione e di incremento sono opzionali. Di fatto, un ciclo \texttt{while} può essere scritto in modo equivalente con un costrutto \texttt{for} nel seguente modo:
+\newpage
+\begin{lstlisting}[style=cstyle]
+  inizializzazione;
+
+  for (; condizione; ) {
+    corpo;
+
+    incremento;
+  }
+\end{lstlisting}
+
+Il costrutto del C che permette di scegliere tra alternative multiple (pi\`u di $2$) \`e lo \texttt{switch}.
+
+\begin{lstlisting}[style=cstyle]
+  inizializzazione;
+
+  switch (variabile) {
+    case valore1:
+    	istruzione1;
+    	break;
+    case valore2:
+    	istruzione2;
+    	break;
+    default:
+    	istruzione3;
+    	break;
+  }
+\end{lstlisting}
+
+Il \texttt{break} tra un case e l'altro permette che venga eseguito solo il codice relativo al case in cui si \`e capitati. Il \texttt{break} finale non \`e necessario ma consigliato (nel caso in cui si dovesse immettere nuovi case).
+
+\subsection{Esercizi}
+
+\input{ex/ex_sommatoria}
+\input{ex/ex_radice_intera}
+
+\input{ex/ex_switch_easy}
+\input{ex/ex_aree}
+
+\input{ex/ex_divisori}
+\input{ex/ex_primo}
+\input{ex/ex_tavola}
+\input{ex/ex_primi}
+
+% \input{ex/ex_segreto}
+
+\input{ex/ex_mcd}
+\input{ex/ex_scf}
+\input{ex/ex_sequenza}
+\input{ex/ex_amicali}
+\input{ex/ex_palindromo}
+\input{ex/ex_interessi}
+
+
+
+%TODO
+\input{ex/ex_taylor}
+
+\clearpage
+\section*{Soluzioni}
+\shipoutAnswer
+
+\end{document}

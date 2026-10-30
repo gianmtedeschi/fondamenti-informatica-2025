@@ -1,0 +1,54 @@
+\begin{Exercise}[label={ex:cp2}]
+	\begin{enumerate}
+		\item Si dica quale dei seguenti numeri \`e il maggiore, motivando con calcoli e ragionamenti la risposta:
+			\begin{itemize}
+				\item[A.] 34 (numero in base 10);
+				\item[B.] 110110 (numero naturale in binario);
+				\item[C.] 57 (numero in base 10);
+				\item[D.] (numero in Complemento a 2);
+				\item[E.] (numero in Complemento a 2).
+			\end{itemize}
+		\item Si indichi quindi il numero \emph{n} di bit che permette di codificare tutti i numeri A - E in Complemento a 2 e li si codifichi tutti in Complemento a 2 usando \emph{n} bit, riportando i passaggi fondamentali dei calcoli.
+		\item Si eseguano (riportando i calcoli) le seguenti operazioni utilizzando \emph{n} bit e si indichino eventuali bit di carry (riporto) e overflow. Si segnalino i casi in cui l'operazione non pu\'o essere eseguita utilizzando gli \emph{n} bit identificati nel punto 2:
+			\begin{itemize}
+				\item[I.] A - B;
+				\item[II.] (C + D) + E;
+				\item[III.] 2A + E.
+			\end{itemize}
+	\end{enumerate}
+
+\end{Exercise}
+
+\begin{Answer}[ref={ex:cp2}]
+	\begin{enumerate}
+		\item Tra i numeri rappresentati in base 10 possiamo immediatamente decidere che il numero maggiore \`e 57. Il numero 1111111 \`e 		chiaramente negativo avendo il bit pi\'u significativo pari a 1, quindi \`e certamente minore di 57. Possiamo convertire in base 10 anche gli altri due numeri per prendere la decisione finale:
+		\begin{itemize}
+			\item 110110:  32+16+4+2 = 54;
+			\item 0011011:  16+8+2+1 = 27;
+		\end{itemize}
+si noti che 0011011 \`e in complemento a 2 (CP2) ma \`e un numero positivo (il bit pi\'u significativo \`e pari a 0), di conseguenza, \`e possibile applicare la regola di conversione che vale anche per i numeri naturali.
+Possiamo quindi concludere che il numero maggiore \`e 57.
+	\item Il numero maggiore, 57, necessita di 7 bit per la conversione, infatti n deve essere tale che $57 \leq 2^{n - 1}$. Per n = 7 si ha che $2^{n - 1}$ \`e pari a 64. Se avessimo scelto n pari a 6, avremmo avuto che $2^{n - 1} = 32$, che è chiaramente minore di 57. Anche l'unico numero negativo \`e espresso su 7 cifre binarie, quindi 7 \`e il numero di bit adeguato a convertire tutti i numeri considerati. Convertendo tutti i numeri in CP2 a 7 bit si ha:
+		\begin{itemize}
+			\item[A.] 34 in base 10 $\Rightarrow$ 0100010 in CP2 su 7 bit;
+			\item[B.] 110110 in binario $\Rightarrow$ 0110110 in CP2 su 7 bit;
+			\item[C.] 57 in base 10 $\Rightarrow$ 0111001 in CP2 su 7 bit;
+			\item[D.] 1111111 in CP2 su 7 bit;
+			\item[E.] 0011011 in CP2 su 7 bit.
+		\end{itemize}
+	\item 
+	\begin{itemize}
+		\item[I.] Prima calcolo $- B$ = 10001010 ed ho:
+		
+			0 1 0 0 0 1 0 + 1 0 0 1 01 0 = [ 0 ] 1 1 0 1 1 0 0;
+
+		\item[II.] Eseguo le due somme:
+
+			0 1 1 1 0 0 1 + 1 1 1 1 1 1 1 = 0 1 1 1 0 0 0 + 0 0 1 1 0 1 1 = [1] 1 0 1 0 0 1 1;
+
+		In questo caso abbiamo overflow.
+		\item[III.] Questa operazione non \`e fattibile in quanto 2A = 68 che darebbe gi\'a overflow.
+	\end{itemize}
+	\end{enumerate}
+
+\end{Answer}

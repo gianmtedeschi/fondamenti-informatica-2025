@@ -1,0 +1,39 @@
+\begin{Exercise}[label={ex:azienda}]
+		Le seguenti dichiarazioni definiscono tipi di dati relativi alla categoria degli impiegati di un'azienda (gli impiegati possono essere di prima, seconda, ..., quinta categoria), agli uffici occupati da tali impiegati, all'edificio che ospita tali uffici (edificio diviso in 20 piani ognuno con 40 uffici).
+
+		\begin{clang}
+/* definizioni dei tipi */
+typedef struct {
+  char nome[20], cognome[20];
+  int cat; // contiene valori tra 1 e 5
+  int stipendio;
+} Impiegato;
+
+typedef enum{
+  nord, nordEst, est, sudEst, sud, sudOvest, ovest, nordOvest
+} Esposizione;
+
+typedef struct {
+  int superficie; /* in m^2 */
+  Esposizione esp;
+  Impiegato occupante;
+} Ufficio;
+
+/* definizioni delle variabili */
+Ufficio torre[20][40];
+
+/* rappresenta un edificio di 20 piani con 40 uffici per piano */
+		\end{clang}
+
+\begin{enumerate}
+		\item Si scriva un frammento di codice (che includa eventualmente anche le dichiarazioni di ulteriori variabili) che stampi il cognome, lo stipendio e la categoria di tutte e sole le persone che occupano un ufficio orientato a sud oppure a sudEst e avente una superficie compresa tra $20$ e $30$ metri quadri;
+  	\item Visualizzi a schermo i piani che non hanno neanche un ufficio esposto a nord;
+  	\item Stampi lo stipendio medio degli impiegati in questi piani che si chiamano ``Giacomo'' di nome.
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:azienda}]
+  \lstinputlisting[style=cstylesmall]{src/torre.c}
+  \lstinputlisting[style=cstylesmall]{src/torre2.c}
+  \lstinputlisting[style=cstylesmall]{src/torre3.c}
+\end{Answer}

@@ -1,0 +1,16 @@
+\begin{Exercise}[label={ex:temperatura}]
+    Una stazione meteorologica registra la temperatura esterna ogni ora, ogni giorno per un mese intero, in una struttura dati apposita: una matrice bi-dimensionale di dimensioni fisiche di 31 righe (i giorni del mese) per 24 colonne (le ore del giorno).
+    Si scriva un programma che calcoli i seguenti dati:
+    \begin{itemize}
+        \item Temperatura media del mese.
+        \item Temperatura media giornaliera.
+        \item Temperatura media diurna (ore comprese tra le 7:00 e le 19:00), su tutto il mese.
+        \item Temperatura media notturna su tutto il mese.
+    \end{itemize}
+
+    \textbf{Nota: } non tutti i mesi hanno 31 giorni! Popoliamo la matrice utilizzando la funzione \texttt{rand()} della libreria \texttt{stdlib}.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:temperatura}]
+  	\lstinputlisting[style=cstylesmall]{src/temperatura.c}
+\end{Answer}

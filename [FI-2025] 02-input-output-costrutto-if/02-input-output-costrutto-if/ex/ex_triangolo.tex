@@ -1,0 +1,16 @@
+\begin{Exercise}[label={ex:triangolo}]
+		\Question Scrivere un programma che dati tre interi positivi valuti se essi possono essere i lati di un triangolo
+
+		\Question Nel caso di risposta positiva al punto precedente si comunichi anche il tipo di triangolo (scaleno, isoscele, equilatero, rettangolo)
+\end{Exercise}
+
+\begin{Answer}[ref={ex:triangolo}]
+		Risoluzione del problema: verifichiamo che la somma di ogni coppia sia minore del terzo lato e che la loro differenza sia maggiore del terzo.
+		
+    \lstinputlisting[style=cstyle]{src/triangolo.c}
+
+		Risoluzione del problema: verifichiamo se \`e equilatero (ha tutti i lati uguali), poi se \`e scaleno (tutti diversi) altrimenti \`e isoscele. Per verificare se \`e rettangolo verifichiamo che valga il teorema di Pitagora tra il lato pi\`u lungo e gli altri due.
+		
+    \lstinputlisting[style=cstyle]{src/tipo_triangolo.c}
+
+\end{Answer}

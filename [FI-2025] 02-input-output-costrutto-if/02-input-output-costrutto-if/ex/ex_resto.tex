@@ -1,0 +1,9 @@
+\begin{Exercise}[label={ex:resto}]
+  Scrivere un programma che prende in ingresso un prezzo in euro e restituisce il numero minimo di banconote utilizzando solo pezzi da $50$, $20$ e $5$ euro. Indicare anche la moneta rimanente.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:resto}]
+		Risoluzione del problema: leggiamo il prezzo da input, quindi dividiamo per $50$ il prezzo (per intero) per trovare il numero di banconote da $50$. Dividiamo poi ci\`o che rimane per $20$ (per intero) e poi ci\`o che rimane per $5$ per avere il numero di banconote da $20$ e $5$. Il resto in monete \`e ci\`o che rimane.
+
+    \lstinputlisting[style=cstyle]{src/resto.c}
+\end{Answer}

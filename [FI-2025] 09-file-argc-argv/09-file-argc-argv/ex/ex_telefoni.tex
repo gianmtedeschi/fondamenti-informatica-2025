@@ -1,0 +1,29 @@
+\begin{Exercise}[label={ex:telefoni}]
+    Una società di telefonia cellulare gestisce un programma di premiazione per "utenti fedeli". In particolare, per
+    ogni cliente viene salvato su un file binario "punti.dat" il nome del cliente (al massimo 31 caratteri) e un
+    numero intero che rappresenta i punti accumulati. Tali informazioni sono organizzate come una struttura \texttt{User}, opportunamente definita.
+
+    Si scriva una funzione \texttt{readPoints()} che ricevuto in ingresso il nome di un file \texttt{usersFile}, un array \texttt{results} di
+    strutture \texttt{User}, la dimensione massima dell’array \texttt{maxDim}, e un limite
+    inferiore di punti \texttt{minPoints}, copi nell’array \texttt{results} i dati dei clienti che hanno almeno i punti specificati da \texttt{minPoints}.
+
+    La funzione deve restituire come risultato il numero di utenti con almeno
+    \texttt{minPoints}. Si noti che tale risultato rappresenta anche la dimensione
+    logica dell’array results. Qualora il file non sia accessibile, la funzione deve restituire il valore -1.
+
+    Si scriva poi un programma \texttt{main()} che chieda all’utente il numero
+    di clienti salvati sul file (tale numero sarà noto solo a tempo di
+    esecuzione), e allochi dinamicamente un vettore V di \texttt{User}
+    sufficientemente grande per poter contenere, nel caso peggiore, i
+    dati di tutti gli utenti salvati in \texttt{usersFile}. Il programma dovrà poi
+    chiedere all’utente il minimo punteggio e, utilizzando la funzione
+    \texttt{readPoints()}, leggere da file e memorizzare in V i dati degli
+    utenti che hanno almeno il punteggio minimo specificato. Il
+    programma infine deve stampare a video il nome ed il punteggio
+    degli utenti contenuti in V se e solo se il nome comincia per “Me”.
+
+\end{Exercise}
+
+\begin{Answer}[ref={ex:telefoni}]
+  	\lstinputlisting[style=cstylesmall]{src/telefoni.c}
+\end{Answer}

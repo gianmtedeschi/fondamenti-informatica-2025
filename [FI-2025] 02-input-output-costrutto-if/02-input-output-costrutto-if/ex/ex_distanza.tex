@@ -1,0 +1,20 @@
+\begin{Exercise}[label={ex:distanza}]
+  Scrivere un programma che calcoli la distanza tra due punti, $a$ e $b$, interi sulla retta $y = 0$.
+
+  \begin{center}
+    \begin{tikzpicture}
+      \draw (0,0) -- (3,0);
+
+      \fill[black] (1,0) circle (2pt) node [above] {a};
+      \fill[black] (2,0) circle (2pt) node [above] {b};
+    \end{tikzpicture}
+  \end{center}
+
+\end{Exercise}
+
+\begin{Answer}[ref={ex:distanza}]
+	Risoluzione del problema: chiediamo di inserire due punti all'utente. Calcolo la differenza delle due ascisse. Se \`e zero i punti coincidono, se \`e negativa dobbiamo restituire l'opposto, altrimenti restituiamo direttamente la differenza.
+
+  \lstinputlisting[style=cstyle]{src/distanza.c}
+
+\end{Answer}

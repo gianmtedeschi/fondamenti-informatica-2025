@@ -1,0 +1,40 @@
+\begin{Exercise}[label={ex:espr_logica}]
+Si consideri la seguente espressione booleana:
+$$((!A \ || \ B) \ \&\& \ (A \  \&\& !B))\ || \ C$$
+e se ne compili la corrispondente tabella di verit\`a (ossia una tabella in cui $0$ rappresenta il valore logico FALSO, $1$ il valore VERO).
+
+Si consideri ora la condizione, scritta in linguaggio C, in cui x e y siano due variabili intere:
+$$((!(x < 0) || (y>0)) \ \&\& \ ((x < 0) \ \&\& \ !(y > 0))) ) \ || \ (x > 3)$$
+ottenuta dall'espressione booleana sopra indicata sostituendo la variabile $A$ con $x < 0$, la variabile $B$ con $y > 0$, la variabile $C$ con $x > 3$
+Si risponda alle seguenti domande giustificando la risposta:
+\begin{enumerate}
+	\item L'espressione \`e vera o falsa quando $x = 5$ e $y = 7$?
+	\item Se $x < 0$, per quali valori di y l'espressione \`e vera?
+\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:espr_logica}]
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+A & B & C & !A & !B & (!A \ || \ B) & (A \  \&\& !B)) & ((!A \ || \ B) \ \&\& \ (A \  \&\& !B)) & TOT\\
+\hline
+0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0\\
+\hline
+0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 1\\
+\hline
+0 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 0\\
+\hline
+0 & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1\\
+\hline
+1 & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 0\\
+\hline
+1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1\\
+\hline
+1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+\hline
+1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 1\\
+\hline
+\end{tabular}
+
+Quando $x = 5$, la variabile $C = 1$, quindi l'espressione \`e vera. Se $x < 0$, la variabile $C = 0$, quindi l'espressione \`e falsa per qualsiasi valore di $y$.
+\end{Answer}

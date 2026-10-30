@@ -1,0 +1,98 @@
+% \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{version}
+% \usepackage[latin1]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{amsfonts}
+\usepackage{url}
+\usepackage{algorithm}
+\usepackage{chngcntr}
+\usepackage[answerdelayed]{exercise}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{colortbl}
+\usepackage{listingsutf8}
+\usepackage[pdftitle = {Dispense di esercizi}, pdfauthor = {Gianmarco Tedeschi e Alberto Marchesi}, pdfsubject = {Fondamenti di Informatica ($082746$ - A.A.~$2025-2026$)}, pdfcreator = {Gianmarco Tedeschi e Alberto Marchesi}, pdfproducer = {-}]{hyperref}
+% \usepackage[automark,nouppercase]{scrpage2}
+\usepackage{mdframed}
+\usepackage{scrlayer-scrpage} % Necessary package for page styles
+
+%\pagestyle{scrheadings}
+
+%\usepackage{titlesec}
+%\newcommand{\sectionbreak}{\clearpage}
+\counterwithin{Exercise}{chapter}
+\counterwithin{Answer}{chapter}
+
+\algrenewcommand\algorithmicthen{\textbf{Allora}}
+\algrenewcommand\algorithmicif{\textbf{Se}}
+\algrenewcommand\algorithmicelse{\textbf{Altrimenti}}
+\algrenewcommand\algorithmicend{\textbf{Chiudi}}
+\algrenewcommand\algorithmicwhile{\textbf{Finch\'e}}
+\algrenewcommand\algorithmicdo{\textbf{Esegui}}
+\algrenewcommand{\algorithmiccomment}[1]{\hskip3em\texttt{//#1}}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{10pt}
+
+\newmdenv[%
+        outerlinewidth=2,%
+        roundcorner=10pt,%
+        leftmargin=0,%
+        rightmargin=0,%
+        outerlinecolor=black,
+        innertopmargin=\topskip,%
+        splittopskip=\topskip,%
+]{algo}
+
+
+\ohead{\headmark}
+\ihead{}
+\chead{}
+\ifoot{A.A.~$2025-2026$}
+\cfoot{Fondamenti di Informatica (082746) - G. Tedeschi}
+\ofoot{Pag.~\pagemark}
+\setheadsepline{.4pt}
+\setfootsepline{.4pt}
+
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+
+\lstdefinestyle{cstyle}{%
+  inputencoding=utf8/latin1,
+  breaklines=true,
+  breakatwhitespace=false,
+  basicstyle=\small\ttfamily,
+  language=c,
+  frame=single,
+  showstringspaces=false
+}
+
+\lstdefinestyle{cstylesmall}{%
+  inputencoding=utf8/latin1,
+  breaklines=true,
+  breakatwhitespace=false,
+  basicstyle=\scriptsize\ttfamily,
+  language=c,
+  frame=single,
+  showstringspaces=false
+}
+
+\lstdefinestyle{console}{%
+  inputencoding=utf8/latin1,
+  breaklines=true,
+  breakatwhitespace=false,
+  basicstyle=\scriptsize\ttfamily,
+  showstringspaces=false,
+  backgroundcolor=\color{lbcolor}
+}
+
+
+\lstnewenvironment{clang}{\lstset{style=cstyle}}{}
+\lstnewenvironment{clangsmall}{\lstset{style=cstylesmall}}{}

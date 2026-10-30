@@ -1,0 +1,21 @@
+\begin{Exercise}[label={ex:bin_ottale}]
+    Convertire il numero binario $(10111001101)_{2}$ in base 8 (ottale).
+\end{Exercise}
+
+\begin{Answer}[ref={ex:bin_ottale}]
+    Si raggruppano i bit a blocchi di tre, partendo da destra. Si aggiungono zeri a sinistra se necessario (in questo caso, un solo zero):
+    \[
+    (\underbrace{010}_{2}\ \underbrace{111}_{7}\ \underbrace{001}_{1}\ \underbrace{101}_{5})_{2}
+    \]
+    Si converte ciascun gruppo di tre bit nel suo equivalente decimale (che è anche la cifra ottale):
+    \begin{align*}
+        010_2 &= 2 \\
+        111_2 &= 4 + 2 + 1 = 7 \\
+        001_2 &= 1 \\
+        101_2 &= 4 + 1 = 5
+    \end{align*}
+    Il risultato si ottiene assemblando le cifre ottali:
+    \[
+    (10111001101)_{2} = (2715)_{8}
+    \]
+\end{Answer}

@@ -1,0 +1,21 @@
+\begin{Exercise}[label={ex:virgola_fissa}]
+    Convertire il numero decimale $+10.625_{10}$ in binario a virgola fissa, utilizzando 5 bit per la parte intera (incluso il segno) e 4 bit per la parte frazionaria.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:virgola_fissa}]
+    \begin{enumerate}
+        \item Parte Intera ($10_{10}$ su 5 bit):
+        $$10_{10} = 1010_2$$
+        Adattato a 5 bit (segno $0$): $01010$.
+        \item Parte Frazionaria ($0.625_{10}$ su 4 bit):
+        Si usa il metodo delle moltiplicazioni successive:
+        \begin{align*}
+            0.625 \times 2 &= 1.25 \quad \to 1 \\
+            0.25 \times 2 &= 0.50 \quad \to 0 \\
+            0.50 \times 2 &= 1.00 \quad \to 1
+        \end{align*}
+        Parte frazionaria: $.101_2$. Adattato a 4 bit: $1010$.
+        \item Unione delle due parti:
+        $+10.625_{10} = 01010.1010_2$
+    \end{enumerate}
+\end{Answer}

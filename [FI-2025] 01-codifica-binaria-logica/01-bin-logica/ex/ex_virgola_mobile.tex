@@ -1,0 +1,24 @@
+\begin{Exercise}[label={ex:virgola_mobile}]
+    Convertire il numero decimale $-0.125_{10}$ nel formato a virgola mobile IEEE 754 a Singola Precisione (32 bit).
+\end{Exercise}
+
+\begin{Answer}[ref={ex:virgola_mobile}]
+    \begin{enumerate}
+        \item Segno $S$: Negativo, $S=1$
+        \item Conversione Binaria e Normalizzazione ($+0.125$):
+        \begin{align*}
+            0.125_{10} &= 0.001_2 \\
+            \text{Normalizzazione:} & \quad 1.0 \times 2^{-3} \\
+            E_{eff} &= -3.
+        \end{align*}
+        \item Esponente Traslato (E su 8 bit): Bias = 127.
+        \begin{align*}
+            E &= E_{eff} + 127 = -3 + 127 = 124_{10} \\
+            E &= 01111100_2
+        \end{align*}
+        \item Mantissa ($M$) su 23 bit: Dalla forma $1.0$, la parte frazionaria è $0$.
+        \[ M = 00000000000000000000000 \]
+        \item Uniamo $S$ | $E$ | $M$:
+        $-0.125_{10} = 1 \quad 01111100 \quad 00000000000000000000000$
+    \end{enumerate}
+\end{Answer}

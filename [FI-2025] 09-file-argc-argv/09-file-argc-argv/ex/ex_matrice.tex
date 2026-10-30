@@ -1,0 +1,17 @@
+\begin{Exercise}[label={ex:matrice}]
+    Una matrice sparsa è una matrice in cui la maggior parte degli elementi è costituita da zeri. 
+    Spesso una matrice sparsa viene rappresentata in formato COO (Coordinate List), 
+    ovvero come una sequenza di triple (i, j, valore) che indicano che, nella posizione (i, j), 
+    è presente un valore diverso da zero (valore $\neq$ 0). Si consideri un file binario denominato 
+    "input6.bin", che contiene due interi rappresentanti il numero di righe e di colonne della matrice, 
+    seguiti dalla matrice stessa rappresentata in modalità ordinaria (cioè come sequenza di r * c elementi,
+    dove r è il numero di righe e c il numero di colonne), i cui elementi sono numeri
+    in virgola mobile a doppia precisione.
+    Si scriva un programma che legga tale file e salvi in un secondo file di testo denominato "coo6.txt" 
+    la rappresentazione COO della matrice.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:matrice}]
+  	\lstinputlisting[style=cstylesmall]{src/matrice.c}
+\end{Answer}
+

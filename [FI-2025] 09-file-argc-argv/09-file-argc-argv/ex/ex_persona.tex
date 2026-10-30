@@ -1,0 +1,32 @@
+\begin{Exercise}[label={ex:lettura_scrittura}]
+    Dato un file di testo "people.txt" che contiene i dati di una serie di persone (non più di 20),
+    una persona per riga.
+    Si scriva un programma che, una volta letti da file i dati di queste persone ne estragga l'insieme di persone
+    compatibili con una nuova persona data salvando il risultato sul file binario "partners.dat".
+    Due persone sono compatibili se sono di sesso diverso e la differenza di età, riferita solo all'anno, non supera i 5 anni.
+
+    Ogni riga del file di testo "people.txt" ha il seguente formato:
+    \begin{itemize}
+        \item cognome (stringa senza spazi, al massimo 19 caratteri).
+        \item un separatore ';'.
+        \item nome (stringa senza spazi, al massimo 19 caratteri).
+        \item un separatore ';'.
+        \item data di nascita (formato gg/mm/aaaa).
+        \item un solo spazio.
+        \item un carattere che indica il sesso ('M' o 'F').
+    \end{itemize}
+
+    Si definiscano le opportune strutture dati e si realizzino le seguenti funzioni:
+    \begin{itemize}
+        \item una funzione \texttt{lettura()} che dato il nome del file, legge i dati delle persone
+        e li memorizza in un array di nome \texttt{elenco}.
+        \item una funzione \texttt{compatibili()} che date due persone restituisce 1 solo se le due persone sono
+        compatibili.
+        \item un \texttt{main()} che invochi la lettura per acquisire le persone, poi chieda all'utente i dati
+        di una nuova persona per scrivere sul file binario l'insieme delle persone compatibili con essa.
+    \end{itemize}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:lettura_scrittura}]
+  	\lstinputlisting[style=cstylesmall]{src/lettura_scrittura.c}
+\end{Answer}

@@ -1,0 +1,282 @@
+\documentclass[oneside]{scrbook}
+
+\input{../preamble.tex}
+\addtocounter{chapter}{8}
+\begin{document}
+
+\chapter{File, Argomenti da Riga di Comando e Scope}
+
+Questa dispensa approfondisce tre aspetti fondamentali del linguaggio C:
+\textbf{gestione dei file}, \textbf{acquisizione degli argomenti da riga di comando} e \textbf{regole dello scope delle variabili}.
+Si tratta di strumenti fondamentali per rendere i programmi più flessibili e in grado di interagire con l'esterno.
+
+\section{I File in C}
+
+Un \textbf{file} è una struttura dati persistente memorizzata su memoria di massa.
+A differenza delle variabili in memoria, i file mantengono i dati anche dopo la fine dell'esecuzione del programma.
+
+Per manipolare un file in C si utilizza una variabile puntatore di tipo \texttt{FILE*} che rappresenta il \textbf{descrittore del file}.
+
+\subsection{Apertura di un File}
+
+\begin{lstlisting}[style=cstyle]
+FILE *fp;
+fp = fopen("dati.txt", "r");  // apertura in lettura
+\end{lstlisting}
+
+La funzione \texttt{fopen} restituisce:
+\begin{itemize}
+    \item un puntatore a \texttt{FILE} (inizializzato all'inizio del file) se l'apertura ha successo.
+    \item \texttt{NULL} in caso di errore.
+\end{itemize}
+
+\paragraph{Modalità di apertura più comuni}
+\begin{itemize}
+    \item \texttt{"r"} lettura (testo)
+    \item \texttt{"w"} scrittura (crea o sovrascrive)
+    \item \texttt{"a"} append
+    \item \texttt{"rb"}, \texttt{"wb"}, \texttt{"ab"} versioni binarie
+\end{itemize}
+
+Dopo l'apertura, il programma opera sul file utilizzando la variabile che lo rappresenta.
+Al termine, la corrispondendenza dovrà essere eliminata: operazione di \emph{chiusura} del file.
+
+\subsection{Chiusura di un File}
+
+\begin{lstlisting}[style=cstyle]
+fclose(fp);
+\end{lstlisting}
+
+Il valore restituto è un intero:
+\begin{itemize}
+    \item 0 se la chiusura ha successo.
+    \item EOF (valore intero negativo) in caso di errore.
+\end{itemize}
+
+Inoltre, l'utilizzo della funzione \texttt{fclose} assicura che tutti i dati eventualmente rimasti in buffer vengano scritti su disco.
+
+\subsection{Lettura e Scrittura di un File}
+Un file di testo è un file che contiene sequenze di caratteri. Per questo motivo un file
+possiede delle caratterische specifiche che lo distinguono da un file binario:
+
+\begin{itemize}
+    \item esiste un concetto di riga e di fine riga ('\textbackslash n').
+    \item i dati sono rappresentati come sequenze di caratteri ASCII.
+    \item la sequenza di caratteri è terminata dal carattere speciale EOF.
+\end{itemize}
+
+I canali di I/O standard non sono altro che file di testo speciali:
+\begin{itemize}
+    \item \texttt{stdin} (standard input): tastiera
+    \item \texttt{stdout} (standard output): schermo
+    \item \texttt{stderr} (standard error): schermo (per messaggi di errore)
+\end{itemize}
+
+\paragraph{Lettura e Scrittura Formattata}
+
+Per leggere o scrivere in un file di testo in maniera formattata ed effettuando
+le conversioni richieste dove necessario si usano \texttt{fscanf} e \texttt{fprintf}.
+
+\begin{lstlisting}[style=cstyle]
+fprintf(fp, "%d %c", numero, carattere);
+fscanf(fp, "%d %c", &numero, &carattere);
+\end{lstlisting}
+
+La lettura restituisce un intero che indica il numero di \emph{campi} letti con successo.
+La scrittura restituisce il numero di \emph{caratteri} scritti con successo.
+
+\textbf{Lettura Carattere per Carattere}
+
+\begin{lstlisting}[style=cstyle]
+int c;
+c = fgetc(fp);
+while (c != EOF) {
+    putchar(c);
+    c = fgetc(fp);
+}
+\end{lstlisting}
+
+\textbf{Lettura di Linee di Testo}
+
+\begin{lstlisting}[style=cstyle]
+char buffer[100];
+while (fgets(buffer, 100, fp) != NULL) {
+    fputs(buffer, stdout);
+}
+\end{lstlisting}
+
+\subsection{File Binari: fread e fwrite}
+Un file binario è una sequenza di byte senza formattazione specifica.
+Può essere usato per archiviare qualunque tipo di informazione. In questo caso input e output
+avvengono sotto forma di una sequenza di byte.
+
+Rispetto ai file di testo, con i file binari la fine del file non è segnata da un carattere speciale (EOF), ma 
+si rileva in base all'esito delle operazioni di lettura.
+
+\begin{lstlisting}[style=cstyle]
+// legge n sequenze di byte di lunghezza Dato
+fread(indirizzo, sizeof(Dato), n, fp); 
+
+// scrive n sequenze di byte di lunghezza Dato
+fwrite(indirizzo, sizeof(Dato), n, fp);
+\end{lstlisting}
+
+la funzione \texttt{fwrite} restituisce il numero di elementi scritti con successo (che possono essere meno di n),
+prelevando i byte a partire dall'indirizzo specificato.
+Analogamente, \texttt{fread} restituisce il numero di elementi letti con successo, che possono
+essere meno di n se si raggiunge la fine del file. Controllare il valore restituito è 
+il solo modo per sapere cosa è stato letto, in particolare per capire se il file è terminato.
+
+
+
+\subsection{Accesso Diretto: fseek e ftell}
+
+\begin{lstlisting}[style=cstyle]
+fseek(fp, 0L, SEEK_END);   // va alla fine del file
+pos = ftell(fp);           // posizione corrente
+rewind(fp);                // equivalente a fseek(fp,0,SEEK_SET)
+\end{lstlisting}
+
+\textbf{Nota:} La funzione \texttt{fseek} permette di spostare il puntatore di lettura/scrittura 
+in una posizione arbitraria del file. La funzione fornisce tre punti di partenza per lo spostamento:
+\begin{itemize}
+    \item \texttt{SEEK\_SET}: dall'inizio del file.
+    \item \texttt{SEEK\_CUR}: dalla posizione corrente.
+    \item \texttt{SEEK\_END}: dalla fine del file.
+\end{itemize} 
+
+\section{Argomenti da Riga di Comando}
+
+È possibile passare informazioni a un programma direttamente da terminale:
+
+\begin{lstlisting}[style=cstyle]
+./programma arg1 arg2 arg3
+\end{lstlisting}
+
+La funzione \texttt{main} può ricevere due parametri:
+
+\begin{lstlisting}[style=cstyle]
+int main(int argc, char *argv[]) {
+    ...
+}
+\end{lstlisting}
+
+\begin{itemize}
+    \item \texttt{argc} = numero totale di argomenti (il primo è il nome del programma);
+    \item \texttt{argv} = array di stringhe con gli argomenti.
+\end{itemize}
+
+\textbf{Esempio}
+
+\begin{lstlisting}[style=console]
+    ./programma prova.txt
+\end{lstlisting}
+
+\begin{lstlisting}[style=cstyle]
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Uso: %s nomefile\n", argv[0]);
+        return 1;
+    }
+
+    FILE *fp = fopen(argv[1], "r");
+    if (fp == NULL) {
+        printf("Errore apertura file!\n");
+        return 1;
+    }
+
+    /* elaborazione */
+    fclose(fp);
+    return 0;
+}
+\end{lstlisting}
+
+\textbf{Conversione di argomenti numerici}
+
+\begin{lstlisting}[style=cstyle]
+int n = atoi(argv[1]);
+float x = atof(argv[2]);
+char c = argv[3][0];
+\end{lstlisting}
+
+\section{Variabili Locali, Statiche e Globali}
+
+Il linguaggio C distingue diverse categorie in base allo \emph{tempo di vita} e allo \emph{scope}.
+
+\subsection{Variabili Locali Automatiche}
+
+Vivono solo all'interno della funzione in cui sono dichiarate.
+Sono allocate sullo stack.
+
+\begin{lstlisting}[style=cstyle]
+void f() {
+    int x = 0; // nuova x a ogni chiamata
+}
+\end{lstlisting}
+
+\subsection{Variabili Locali Statiche}
+
+Mantengono il proprio valore anche dopo la fine della funzione.
+
+\begin{lstlisting}[style=cstyle]
+void f() {
+    static int x = 0;
+    x++;
+    printf("%d\n", x);
+}
+\end{lstlisting}
+
+Ogni chiamata stampa un valore crescente.
+
+\subsection{Variabili Globali}
+
+Sono dichiarate fuori da qualsiasi funzione.
+Sono visibili da tutto il file (scope di file).
+
+\begin{lstlisting}[style=cstyle]
+int contatore = 0; // globale
+
+void f() { contatore++; }
+\end{lstlisting}
+
+\paragraph{Attenzione}  
+L’uso indiscriminato di variabili globali rende difficile il debug e la manutenibilità del codice.
+
+\subsection{Blocchi di Istruzioni e Regole dello Scope}
+
+Un \textbf{blocco} è un insieme di istruzioni racchiuse tra \texttt{\{} e \texttt{\}}.
+
+Le variabili dichiarate in un blocco esistono solo all’interno di quel blocco.
+
+\begin{lstlisting}[style=cstyle]
+int x = 1;
+if (x > 0) {
+    int x = 5;   // nasconde la x esterna
+    printf("%d\n", x); // stampa 5
+}
+printf("%d\n", x);     // stampa 1
+\end{lstlisting}
+
+Una dichiarazione interna con lo stesso nome di una variabile esterna \textbf{nasconde} temporaneamente quella esterna.
+
+\section{Esercizi}
+
+% Facili
+\input{ex/ex_lettura_scrittura.tex}
+\input{ex/ex_massimo.tex}
+\input{ex/ex_matrice.tex}
+\input{ex/ex_studenti.tex}
+\input{ex/ex_telefoni.tex}
+\input{ex/ex_cifrario.tex}
+\input{ex/ex_voti.tex}
+\input{ex/ex_archivio.tex}
+
+% Difficili
+
+
+\clearpage
+\section*{Soluzioni}
+\shipoutAnswer
+
+
+\end{document}

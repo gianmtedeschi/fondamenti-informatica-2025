@@ -1,0 +1,26 @@
+\begin{Exercise}[label={ex:compressa}]
+    Si considerino le seguenti definizioni:
+    \begin{lstlisting}[style=cstylesmall]
+        // Lista di interi
+        typedef struct el{
+            int dato;
+            struct el* prox;
+        } Node;
+        typedef Node* Lista;
+
+        // Lista compressa di interi
+        typedef struct c_el{
+            int dato, count;
+            struct c_el* prox;
+        } CNode;
+        typedef CNode* ListaCompressa;
+    \end{lstlisting}
+    Le liste compresse rappresentano le classiche liste con nodi in cui appare il valore e il numero di volte che appare nella lista originale.
+    
+    \textbf{Esempio:} la lista \texttt{[3,3,3,5,5,2,2,2,2]} viene rappresentata come \texttt{[(3,3),(5,2),(2,4)]}.  
+    Scrivere una funzione che prende una lista e costruisce la sua rappresentazione compressa.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:compressa}]
+  	\lstinputlisting[style=cstylesmall]{src/compressa.c}
+\end{Answer}

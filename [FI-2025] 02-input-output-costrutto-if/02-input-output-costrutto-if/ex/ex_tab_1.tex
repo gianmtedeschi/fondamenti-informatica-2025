@@ -1,0 +1,30 @@
+\begin{Exercise}[label={ex:tab_1}]
+    Si consideri la seguente espressione booleana:
+    $$(A \ \&\& \ B) \ || \ !C$$
+    e se ne compili la corrispondete tabella di verit\`a.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:tab_1}]
+\centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        A & B & C & A \&\& B & !C & (A \&\& B) || !C \\
+        \hline
+        0 & 0 & 0 & 0 & 1 & 1 \\
+        \hline
+        0 & 0 & 1 & 0 & 0 & 0 \\
+        \hline
+        0 & 1 & 0 & 0 & 1 & 1 \\
+        \hline
+        0 & 1 & 1 & 0 & 0 & 0 \\
+        \hline
+        1 & 0 & 0 & 0 & 1 & 1 \\
+        \hline
+        1 & 0 & 1 & 0 & 0 & 0 \\
+        \hline
+        1 & 1 & 0 & 1 & 1 & 1 \\
+        \hline
+        1 & 1 & 1 & 1 & 0 & 1 \\
+        \hline
+    \end{tabular}
+\end{Answer}

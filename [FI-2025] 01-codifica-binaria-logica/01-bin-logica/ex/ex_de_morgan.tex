@@ -1,0 +1,33 @@
+\begin{Exercise}[label={ex:de_morgan_tabella}]
+    Data l'espressione logica $\text{!(A || !B) \&\& C}$:
+    \begin{enumerate}
+        \item Utilizzare le Leggi di De Morgan per semplificare la negazione della parentesi.
+        \item Costruire la tabella di verità completa per l'espressione originale.
+    \end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:de_morgan_tabella}]
+    \begin{enumerate}
+        \item Semplificazione (Leggi di De Morgan):
+        \begin{align*}
+            \text{!(A || !B) \&\& C} &\equiv (\text{!A \&\& !!B) \&\& C} \quad \text{[De Morgan]} \\
+            &\equiv !A \&\& B \&\& C \quad \text{[Doppia Negazione]}
+        \end{align*}
+        \item Tabella di verità:
+            \[
+            \begin{array}{|c|c|c|c|c|c|}
+                \hline
+                \text{A} & \text{B} & \text{C} & \text{!B} & \text{A || !B} & \text{!(A || !B) \&\& C} \\ \hline
+                0 & 0 & 0 & 1 & 1 & 0 \\ \hline
+                0 & 0 & 1 & 1 & 1 & 0 \\ \hline
+                0 & 1 & 0 & 0 & 0 & 0 \\ \hline
+                0 & 1 & 1 & 0 & 0 & 1 \\ \hline
+                1 & 0 & 0 & 1 & 1 & 0 \\ \hline
+                1 & 0 & 1 & 1 & 1 & 0 \\ \hline
+                1 & 1 & 0 & 0 & 1 & 0 \\ \hline
+                1 & 1 & 1 & 0 & 1 & 0 \\ \hline
+        
+            \end{array}
+            \]
+    \end{enumerate}
+\end{Answer}

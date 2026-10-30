@@ -1,0 +1,38 @@
+\begin{Exercise}[label={ex:vacanza}]
+
+(TdE Gennaio 2019) Non vado in vacanza se almeno due dei tre seguenti predicati non sono soddisfatti: (A) ho un gruzzoletto da parte, (B) ho almeno due settimane in cui posso non studiare, (C) ho finito gli esami a luglio.
+
+		\Question Scrivere la tabella di verit\`a per il predicato ``Non vado in vacanza''  attraverso i predicati semplici A, B e C.
+		
+		\Question La traduzione di tale condizione con $((!A \; || \; !B) \; \&\& \; (!A \; || \; !C) \; \&\& \; (!B \; || \; !C))$ \`e corretta?
+\end{Exercise}
+
+\begin{Answer}[ref={ex:vacanza}]
+
+\begin{enumerate}
+	\item Due dei tre predicati devono essere falsi perch\'e io non vada in vacanza, quindi la traduzione della precedente condizione \'e:
+	
+			(! A \&\& ! B) || (! A \&\& ! C) || (! B \&\& ! C)
+
+			in tabella della verit\`a:
+			
+			\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c|c}
+A & B & C & Non vado in vacanza \\ \hline
+0 & 0 & 0 & 1                   \\
+0 & 0 & 1 & 1                   \\
+0 & 1 & 0 & 1                   \\
+0 & 1 & 1 & 0                   \\
+1 & 0 & 0 & 1                   \\
+1 & 0 & 1 & 0                   \\
+1 & 1 & 0 & 0                   \\
+1 & 1 & 1 & 0                  
+\end{tabular}
+\end{table}
+
+	\item Per la verifica che il predicato \'e effettivamente corretto possiamo utilizzare le leggi di de Morgan per verificare l'equivalenza con la soluzione del punto 1. In alternativa si pu\`o scrivere la tabella di verit\`a e verificare che rifletta la condizione richiesta.
+
+\end{enumerate}
+
+\end{Answer}

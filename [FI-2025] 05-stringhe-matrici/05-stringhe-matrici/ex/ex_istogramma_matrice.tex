@@ -1,0 +1,12 @@
+\begin{Exercise}[label={ex:istogramma_matrice}]
+  	Data $m$ una matrice di dimensione $n \times n$ (costante simbolica) di numeri interi nell'intervallo $[0,9]$:
+  	\begin{enumerate}
+  			\item si scriva un frammento di programma in linguaggio C (con le relative dichiarazioni di variabili necessarie al corretto funzionamento), che trovi il numero pi\`u frequente (si ipotizzi che tale numero sia unico).
+				\item si scriva un frammento che memorizzi in un vettore e stampi a schermo tutti i numeri presenti nella matrice con valore minore del valore pi\`u frequente e successivamente memorizzi in un altro vettore tutti quelli con valore maggiore di quello più frequente e li stampi;
+  			\item aggiungere al programma di cui sopra un frammento di codice che legga tutti e soli i valori memorizzati nel secondo dei due vettori e stampi a video se i valori che vi sono contenuti sono o meno monotoni crescenti, ovvero se per ogni $i$ si ha $a_i \leq a_{i+1}$.
+  	\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:istogramma_matrice}]
+  	\lstinputlisting[style=cstylesmall]{src/opmatrice.c}
+\end{Answer}

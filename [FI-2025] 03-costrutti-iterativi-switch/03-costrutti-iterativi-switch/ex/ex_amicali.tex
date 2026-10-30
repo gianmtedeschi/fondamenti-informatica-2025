@@ -1,0 +1,14 @@
+\begin{Exercise}[label={ex:amicali}]
+		Dati due numeri $m$ e $n$ questi sono numeri amicali se la somma dei divisori di $m$ è uguale a $n$, e viceversa (per esempio $220$ e $284$, $1184$ e $1210$, $2620$ e $2924$, $5020$ e $5564$, $6232$ e $6368$, $17296$ e $18416$). Ad esempio si ha:
+		\begin{align*}
+			& 220 \rightarrow 110 + 55 + 44 + 22 + 20 + 11 + 10 + 5 + 4 + 2 + 1 = 284\\
+			& 284 \rightarrow 142 + 71 + 4 + 2 + 1 = 220
+		\end{align*}
+		Scrivere un programma che ricevuto in ingresso due numeri interi restituisce $1$ se i numeri sono amicali, $0$ altrimenti.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:amicali}]
+		\lstinputlisting[style=cstyle]{src/amicali.c}
+		\paragraph{Attenzione: }
+			L'algoritmo che viene presentato non \`e efficiente. Volendo si potrebbe minimizzare il numero delle iterazioni considerate.
+\end{Answer}

@@ -1,0 +1,25 @@
+\begin{Exercise}[label={ex:massimo}]
+  Scrivere un programma che chieda all'utente di inserire un numero variabile (al massimo $10$) di valori reali. Il programma dovr\`a assicurarsi che l'utente non possa inserire pi\`u di $10$ valori.
+
+  Il programma dovr\`a cercare, durante l'acquisizione, la posizione del minimo e del massimo.
+
+  Infine, il programma dovr\`a stampare un sommario dei valori inseriti, con l'indicazione della posizione del minimo (indicata con un segno $-$) e del massimo (indicata con un segno $+$), il tutto formattato come indicato di seguito.
+
+\begin{lstlisting}[style=console]
+Quanti elementi vuoi inserire (max: 10)? 100
+Il valore inserito è troppo grande!
+Quanti elementi vuoi inserire (max: 10)? 4
+Inserire il 1o valore: 100
+Inserire il 2o valore: 20
+Inserire il 3o valore: -1
+Inserire il 4o valore: 5.3
+  +| 100.00
+   | 20.00
+-  | -1.00
+   | 5.30
+\end{lstlisting}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:massimo}]
+  \lstinputlisting[style=cstylesmall]{src/massimo.c}
+\end{Answer}

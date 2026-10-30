@@ -1,0 +1,12 @@
+\begin{Exercise}[label={ex:tempo}]
+  Scrivere un programma che prende in ingresso un tempo espresso in secondi e ne restituisce l'equivalente nel formato ore, minuti, secondi.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:tempo}]
+	Risoluzione del problema: leggiamo e memorizziamo i secondi da convertire. Dividendo (per intero) per $60$ calcoliamo il numero di minuti e, calcolando il resto, otteniamo i secondi nel secondo formato. Ripetendo l'operazione con i minuti riusciamo a trovare il numero di ore e minuti che ci occorrono nel secondo formato. Stampiamo a schermo ore, minuti e secondi. 
+  \lstinputlisting[style=cstyle]{src/tempo.c}
+  
+  Oppure in maniera più compatta:
+  
+  \lstinputlisting[style=cstyle]{src/tempo2.c}
+\end{Answer}

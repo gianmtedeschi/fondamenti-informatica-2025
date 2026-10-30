@@ -1,0 +1,101 @@
+\documentclass[oneside]{scrbook}
+
+\input{../preamble.tex}
+
+\addtocounter{chapter}{4}
+
+\begin{document}
+
+\chapter{Stringhe e Matrici}
+
+\paragraph{Stringhe}
+Le stringhe di caratteri sono gestite in C come dei vettori di \texttt{char} con alla fine un ``tappo'' dato dal carattere \texttt{'\textbackslash0'}. 
+
+E' possibile acquisire un'intera stringa di caratteri in una sola istruzione grazie all'istruzione \texttt{scanf(`\%s`, variabile)} oppure \texttt{gets(variabile)}. Mentre l'istruzione \texttt{scanf(`\%s`, variabile)} ferma l'acquisizione al primo spazio,  
+\texttt{gets(variabile)} inserisce nella variable tutto l'input fino al primo invio. \`E importante notare come quando si usano funzioni come \texttt{scanf()} o \texttt{gets()} per leggere input, se si immettono più caratteri o caratteri errati (ad esempio, superando i limiti di una stringa o inserendo caratteri non validi per un determinato tipo di input), questi caratteri possono rimanere nel buffer di input. Questo può creare problemi nelle successive richieste di input, perché queste potrebbero leggere direttamente dal buffer rimanente invece di attendere nuovo input dall'utente. Alcune soluzioni prevedono di \emph{svuotare} i caratteri rimanenti in modo da avere il buffer libero per la prossima lettura. Questo può essere eseguito utilizzando la funzione \texttt{getchar()} che consuma un singolo carattere, oppure utilizzando la funzione \texttt{fflush(stdin)} che svuoterà l'intero buffer di input.
+
+
+
+Poich\`e le stringhe necessitano di un tappo, ogni volta che ne dichiaro una devo aggiungere un elemento per il tappo, ossia se voglio una stringa lunga \texttt{N\_MAX} dovr\`o dichiarare un array di \texttt{N\_MAX+1} elementi.
+
+Esiste una libreria di C che gestisce le stringhe \texttt{string.h} essa ci permette di:
+\begin{itemize}
+		\item ottenere la lunghezza di una stringa con la funzione \texttt{strlen(stringa)};
+		\item confrontare due stringhe \texttt{strcmp(stringa1, stringa2)} e restituisce zero se sono uguali, un numero negativo se \texttt{stringa1} viene prima in ordine lessicografico di \texttt{stringa2} e un numero positivo se \texttt{stringa2} viene prima in ordine lessicografico di \texttt{stringa1} (se i caratteri sono tutti maiuscoli o tutti minuscoli);
+		\item copiare una stringa \texttt{stringa2} in un'altra stringa \texttt{stringa1} con la funzione\\
+		\texttt{strcpy(stringa1, stringa2)};
+		\item concatenare alla stringa \texttt{stringa1} la stringa \texttt{stringa2} con la funzione\\
+		\texttt{strcat(stringa1,stringa2)};
+\end{itemize}
+
+\paragraph{Matrici}
+Le matrici in C vengono definite come vettori di vettori. Ad esempio per dichiarare una matrice bidimensionale dovremo scrivere:
+\begin{lstlisting}[style=cstyle]
+#define DIM1 n_righe 
+#define DIM2 n_colonne
+
+void main(){
+
+tipo_variabile nome_variabile[DIM1][DIM2];
+
+istruzioni;
+}
+\end{lstlisting}
+dove \texttt{n\_righe} e \texttt{n\_colonne} sono degli interi che specificano il numero di righe e colonne della matrice. Similmente ai vettori le matrici vengono memorizzate riga per riga, per indice di riga crescente, e, all'interno di ogni riga, per indice di colonna crescente (Figura \ref{fig:matrice}).
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+        % Draw the matrix grid (6x1)
+        \draw[thick] (0,0) rectangle (6,-6); % Outer rectangle
+        \foreach \i in {1,2,3,4,5} {
+            \draw[thick] (0,-\i) -- (6,-\i); % Horizontal lines
+        }
+
+        % Matrix elements (texts)
+        \node at (3,-0.5) {\texttt{val.\ matrice[0][0]}};
+        \node at (3,-1.5) {\texttt{val.\ matrice[0][1]}};
+        \node at (3,-2.5) {\texttt{val.\ matrice[0][2]}};
+        \node at (3,-3.5) {\texttt{val.\ matrice[1][0]}};
+        \node at (3,-4.5) {\texttt{val.\ matrice[1][1]}};
+        \node at (3,-5.5) {\texttt{val.\ matrice[1][2]}};
+
+        % Draw the red curly brace to group the first three cells for matrice[0]
+        \draw[thick, red] (0,-0.1) -- (-0.5,-0.1) .. controls (-0.5, -1.5) and (-0.5, -1.5) .. (-0.5,-2.9) -- (0,-2.9);
+        \node[red] at (-1.6, -1.5) {\texttt{matrice[0]}};
+
+        % Draw the red curly brace to group the first three cells for matrice[1]
+        \draw[thick, red] (0,-3.1) -- (-0.5,-3.1) .. controls (-0.5, -4.5) and (-0.5, -4.5) .. (-0.5,-5.9) -- (0,-5.9);
+        \node[red] at (-1.6, -4.5) {\texttt{matrice[1]}};
+        
+    \end{tikzpicture}
+    \caption{Rappresentazione di una matrice 2x3 in memoria}
+    \label{fig:matrice}
+\end{figure}
+
+Nel caso di dimensioni superiori a $2$, dovremo mettere tante parentesi quadre e specificare le grandezze massime per ogni dimensione.
+		
+\section{Esercizi}
+
+% stringhe
+\input{ex/ex_strcat}
+\input{ex/ex_occorrenze}
+\input{ex/ex_palindromo}
+\input{ex/ex_secret}
+\input{ex/ex_cesare}
+% \input{ex/ex_farfallino}
+\input{ex/ex_istogramma}
+\input{ex/ex_anagramma}
+
+% matrici
+\input{ex/ex_matrice_diagonale}
+\input{ex/ex_spirale}
+\input{ex/ex_istogramma_matrice}
+\input{ex/ex_riga_somma_massima}
+\input{ex/ex_temperatura}
+
+\clearpage
+\section*{Soluzioni}
+\shipoutAnswer
+
+\end{document}

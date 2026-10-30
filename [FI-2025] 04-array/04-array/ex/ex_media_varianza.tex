@@ -1,0 +1,23 @@
+\begin{Exercise}[label={ex:media_varianza}]
+  	Scrivere un programma che acquisisca un numero stabilito dall'utente di voti di esami e si assicuri che tutti i voti inseriti siano nell'intervallo $[18,30]$. Il numero massimo di voti inseribili \`e $20$, ma l'utente potrebbe decidere di inserire meno voti. Il programma dovr\`a poi stampare a video un sommario simile a quello di seguito. La media troncata \`e la media calcolata non contando gli estremi (voti minimo e massimo).
+
+\begin{lstlisting}[style=console]
+STATISTICHE VOTI:
+
+Numero esami sostenuti: ...
+Media: ...
+Media troncata: ...
+Varianza: ...
+Deviazione standard: ...
+\end{lstlisting}
+
+Per il calcolo la varianza, $\hat{\sigma}^2$, utilizzare la seguente formula:
+\begin{equation}
+  \hat{\sigma}^2 = \frac{\sum_{i = 1}^{N} (v_i - \hat{v})^2}{N-1}
+\end{equation}
+dove $v_i$ \`e l'$i$-esimo voto e $\hat{v}$ \`e la media campionaria dei voti. La deviazione standard \`e semplicemente la radice quadrata della varianza.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:media_varianza}]
+  \lstinputlisting[style=cstylesmall]{src/media_varianza.c}
+\end{Answer}

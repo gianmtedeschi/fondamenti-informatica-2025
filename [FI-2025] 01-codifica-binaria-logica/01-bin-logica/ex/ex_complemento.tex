@@ -1,0 +1,51 @@
+\begin{Exercise}[label={ex:complemento}]
+		\begin{itemize}
+				\item[(a)] Si dica qual \`e l'intervallo di valori interi rappresentabile con la codifica in complemento a due a 9 bit.
+				\item[(b)] Con riferimento a tale codifica indicare, giustificando brevemente le risposte, quali delle seguenti operazioni possono essere effettuate correttamente:
+				\begin{itemize}
+						\item $-254 - 255$
+						\item $+254 - 253$
+						\item $-18 + 236$
+						\item $+217 + 182$
+				\end{itemize}
+				\item[(c)] Mostrare in dettaglio come avviene il calcolo delle operazioni (i) e (ii), evidenziando il bit di riporto e il bit di overflow cos\`i ottenuti.
+		\end{itemize}
+
+\end{Exercise}
+
+\begin{Answer}[ref={ex:complemento}]
+		\begin{itemize}
+				\item[(a)] I valori rappresentabili vanno da $- 2^{m-1} = -256$ a $2^{m-1}-1 = +255$ compresi.
+				\item[(b)] Le soluzioni delle operazioni sono:
+				\begin{itemize}
+						\item $-254 - 255$ NO si ottiene un valore negativo troppo grande in valore assoluto
+						\item $+254 - 253$ SI si ottiene un valore piccolo in valore assoluto
+						\item $- 18 + 236$ SI si ottiene un valore positivo, grande in valore assoluto ma nei limiti
+						\item $+217 + 182$ NO si ottiene un valore positivo troppo grande in valore assoluto
+						\end{itemize}
+				\item[(c)]
+						\item In complemento a 2 a $m = 9$ bit, $(-254)_{10} = (100000010)_{CP2}$ (perch\`e $(254)_{10} = (011111110)_2$). Da questo possiamo ricavare che $(-255)_{10} = (100000001)_{CP2}$ essendo $-255 = -254 - 1$. La somma diventa:\\
+						\begin{table}[H]
+						\centering
+						\begin{tabular}{cccccccccccc}
+								&& (1)\\ 
+								&& 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 &0 &+\\
+								&& 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &1 &=\\
+								\hline
+								[1]&(1)& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 &1 &\\
+						\end{tabular}
+						\end{table}
+						\item $254$ in complemento a due \`e $(011111110)_{CP2} = (011111110)_2$ essendo positivo. Invece $-253 = -254 +1 = (100000011)_{CP2}$, quindi:\\
+						\begin{table}[H]
+						\centering
+						\begin{tabular}{cccccccccccc}
+								&      &(1)&(1)&(1)&(1)&(1)&(1)&(1)&(1)&  & \\
+								&      & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 &0 &+\\
+								&      & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 &1 &=\\
+								\hline
+								[0]&(1)& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 &1 &\\
+						\end{tabular}
+						\end{table}
+						ignorando il riporto abbiamo il risultato esatto $(000000001)_{CP2} = (1)_{10}$.
+				\end{itemize}
+\end{Answer}

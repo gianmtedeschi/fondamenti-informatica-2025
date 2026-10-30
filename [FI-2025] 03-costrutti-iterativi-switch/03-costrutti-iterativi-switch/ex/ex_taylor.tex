@@ -1,0 +1,10 @@
+\begin{Exercise}[label={ex:taylor}]
+  	Scrivere un programma che dato un numero reale $x$ e un intero positivo $n$ calcoli lo sviluppo di McLaurin del seno in $x$ all'ordine $n$. Si ricorda che lo sviluppo di Taylor del seno \`e dato dalla sommatoria:
+  	$$ \sin{x} = \sum^{n}_{i=0} \frac{(-1)^i}{(2i+1)!} x^{2i+1}$$
+\end{Exercise}
+
+\begin{Answer}[ref={ex:taylor}]
+  \lstinputlisting[style=cstyle]{src/taylor.c}
+  \paragraph{Nota: } Il ricalcolo del fattoriale ad ogni iterazione è costoso ed inefficiente, possiamo ottenere una soluzione più efficiente calcolandolo in modo incrementale.  
+  \lstinputlisting[style=cstyle]{src/taylor_2.c}
+\end{Answer}

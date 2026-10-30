@@ -1,0 +1,32 @@
+\begin{Exercise}[label={ex:libretto}]
+		Scrivere un programma che permetta all'utente di gestire un libretto di voti di esami, per un massimo di 20 esami. Ogni esame sostenuto ha i seguenti attributi:
+
+		\begin{itemize}
+		    \item nome del corso (stringa di massimo 256 caratteri)
+		    \item voto (minimo 18, massimo 30)
+		    \item data (in formato gg/mm/aaaa)
+		    \item codice del corso (codice di massimo 6 cifre)
+		\end{itemize}
+
+		Il programma permette all'utente di svolgere le seguenti operazioni:
+
+		\begin{itemize}
+		    \item \textbf{inserimento:} inserisce un esame in fondo alla lista degli esami eventualmente presenti.
+		    \item \textbf{stampa:} stampa tutti gli esami presenti, con i dettagli di cui sopra.
+		    \item \textbf{ricerca:} chiede all'utente di inserire un codice e cerca nel libretto la presenza di un esame corrispondente a quel codice. Se presente, stampa tale esame.
+		    \item \textbf{uscita:} esce dal programma.
+		\end{itemize}
+		tramite un menù di scelta di questo tipo:
+		\begin{verbatim}
+		    [i] inserimento nuovo esame
+		    [s] stampa del libretto
+		    [r] ricerca per codice
+		    [x] uscita
+		\end{verbatim}
+
+		Il programma deve continuare a presentare tale menù, fino a quando l'utente non preme il tasto per uscire.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:libretto}]
+  	\lstinputlisting[style=cstylesmall]{src/libretto.c}
+\end{Answer}

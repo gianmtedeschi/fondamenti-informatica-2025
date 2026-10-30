@@ -1,0 +1,15 @@
+\begin{Exercise}[label={ex:aree}]
+		\Question Scrivere un programma che dato un numero reale positivo $l$ e un intero positivo $n$ restituisca l'area del poligono regolare con $n$ lati di lunghezza $l$. Si implementi una soluzione per che gestisca i casi $n \in \{ 1, \ldots, 6 \}$ e che sia espandibile agevolmente.
+		Suggerimento: l'area di un poligono regolare \`e:
+		\begin{equation}
+			A = \frac{nl^2}{4\tan(\frac{\pi}{n})}
+		\end{equation}
+		
+		\Question Supporre ora che l'utente possa inserire valori negativi per $l$ e $n$. Si ripeta l'acquisizione dei dati finché l'utente non inserisce dei valori accettabili per i due parametri.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:aree}]
+  \Question \lstinputlisting[style=cstyle]{src/aree.c}
+
+  \Question \lstinputlisting[style=cstyle]{src/aree2.c}
+\end{Answer}

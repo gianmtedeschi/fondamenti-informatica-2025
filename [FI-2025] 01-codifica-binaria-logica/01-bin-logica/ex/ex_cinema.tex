@@ -1,0 +1,33 @@
+\begin{Exercise}[label={ex:cinema}]
+
+(TdE Luglio 2018) Si considerino le seguenti frasi, esprimibili in logica proposizionale tramite tre predicati (A, B, C), che esprimono due condizioni per cui si pu\`o entrare al cinema gratis:
+
+\begin{enumerate}
+	\item Sei il millesimo cliente E sei il cliente pi\`u paffutello della sala, OPPURE non hai mai visto il film in programma.
+	\item Hai gi\`a visto il film in programma E almeno una delle seguenti condizioni \`e vera:
+\begin{itemize}
+	\item non sei il millesimo cliente;
+	\item c'\`e qualche cliente in sala paffutello almeno quanto te.
+\end{itemize}
+\end{enumerate}
+
+Si definiscano i tre predicati logici A, B, C contenuti nelle due precedenti frasi, si traducano quindi le due frasi in espressioni booleane, si dica se le proposizioni espresse nelle due frasi sono equivalenti, giustificando la risposta.		
+		
+\end{Exercise}
+
+\begin{Answer}[ref={ex:cinema}]
+
+	Definiamo:
+	\begin{itemize}
+		\item A:  ``sei il millesimo cliente'';
+		\item B: ``sei il cliente pi\`u paffutello della sala'';
+		\item C: ``hai visto il film in programma''.
+	\end{itemize}
+	
+	La prima frase corrisponde a: (A \&\& B) || !C.
+	
+	La seconda frase corrisponde a: C \&\& (!A || !B).
+	
+	Le due espressioni non sono equivalenti perch\'e, quando C \'e falsa, la prima \'e sempre vera, mentre la seconda \'e sempre falsa. In alternativa si scrivano le tabelle di verit\`a delle due espressioni e si noti che non sono identiche.
+
+\end{Answer}

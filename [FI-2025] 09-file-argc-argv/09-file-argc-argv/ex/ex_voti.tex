@@ -1,0 +1,27 @@
+\begin{Exercise}[label={ex:voti}]
+    Si scriva un programma che gestisca un database di voti universitari salvati su un file "registro.txt".
+    Il programma deve gestire due modilità operative distinte:
+    \begin{itemize}
+        \item Modalità aggiunta (-add): aggiunge un nuovo studente al registro. Richiede tre parametri: nome, cognome e voto. 
+        \item Modalità ricerca (-find): cerca e stampa a video tutti gli studenti che hanno un voto superiore o uguale ad una soglia specificata.
+    \end{itemize}
+
+    Si scriva una funzione \texttt{aggiungi\_studente()} che aggiunge un nuovo studente al file "registro.txt" 
+    e una funzione \texttt{cerca\_studenti()} che apre e cerca all'interno di "registro.txt" 
+    tutti gli studenti con voto superiore o uguale alla soglia specificata. Si gestiscano le due modalità come
+    argomenti da riga di comando e si aggiunga la possibilità di utilizzare un file di registro personalizzato usando come flag "-f".
+
+    \textbf{Esempio:}
+    \begin{lstlisting}[style=console]
+        # Usa il file di default, aggiunge Mario Rossi con 28
+        ./programma -add Mario Rossi 28
+
+        # Usa un file diverso, cerca voti >= 25
+        ./programma -f esame_c.txt -find 25
+    \end{lstlisting}
+    
+\end{Exercise}
+
+\begin{Answer}[ref={ex:voti}]
+  	\lstinputlisting[style=cstylesmall]{src/voti.c}
+\end{Answer}

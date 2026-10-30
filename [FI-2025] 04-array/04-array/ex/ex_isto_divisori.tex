@@ -1,0 +1,23 @@
+\begin{Exercise}[label={ex:isto_divisori}]
+	Scrivere un programma che, acquisita una sequenza di al massimo $50$ numeri interi tra $1$ e $100$, stampi a video l'istogramma dei divisori. L'istogramma deve avere tutti i valori da $2$ al valore massimo immesso diviso per $2$. Il programma deve considerare solo i divisori propri, dove un divisore positivo di $n$ diverso da $n$ stesso e  $1$ \`e chiamato divisore proprio.
+
+	Un esempio dell'output del programma \`e:
+\begin{lstlisting}[style=console]
+Quanti numeri vuoi considerare: 5
+
+Inserire il 1o numero: 6
+Inserire il 2o numero: 4
+Inserire il 3o numero: 3
+Inserire il 4o numero: 9
+Inserire il 5o numero: 12
+2		| ***
+3		| ***
+4		| *
+5		| 
+6		| *
+\end{lstlisting}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:isto_divisori}]
+  \lstinputlisting[style=cstylesmall]{src/isto_divisori.c}
+\end{Answer}

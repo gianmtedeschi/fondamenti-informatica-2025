@@ -1,0 +1,55 @@
+\begin{Exercise}[label={ex:somma_conv}]
+    Convertire in base 2 i numeri 77 e 156. Sommare in base 2 i risultati ottenuti.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:somma_conv}]
+    Per convertire il valore $77_{10}$ saranno necessari $n \geq \lceil \log_2(77) \rceil = \lceil 6.26 \rceil = 7$ bit. 
+
+    \begin{center}
+    \begin{tabular}{r|r}
+        \multicolumn{2}{c}{2} \\
+        77 & 1 \\
+        38 & 0 \\
+        19 & 1 \\
+        9 & 1 \\
+        4 & 0 \\
+        2 & 0 \\
+        1 & 1 \\
+        0 &
+    \end{tabular}
+    \end{center}
+
+    $77_{10} = 1001101_2$
+    
+    Per convertire il valore $156_{10}$ saranno necessari $n \geq \lceil \log_2(156) \rceil = \lceil 7.28 \rceil = 8$ bit. 
+
+    \begin{center}
+    \begin{tabular}{r|r}
+        \multicolumn{2}{c}{2} \\
+        156 & 0 \\
+        78 & 0 \\
+        39 & 1 \\
+        19 & 1 \\
+        9 & 1 \\
+        4 & 0 \\
+        2 & 0 \\
+        1 & 1 \\
+        0 &
+    \end{tabular}
+    \end{center}
+
+    $156_{10} = 10011100_2$
+    
+    Eseguiamo ora la somma binaria:
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{ccccccccccc}
+            &      & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & \\
+            &      & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 1 &+\\
+            &      & 1 & 0 & 0 & 1 & 1 & 1 & 0 & 0 &=\\
+            \hline
+            & & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 &\\
+    \end{tabular}
+    \end{table}
+    Il risultato è $S = (11101001)_{2}$.
+\end{Answer}

@@ -1,0 +1,133 @@
+\documentclass[oneside]{scrbook}
+
+\input{../preamble.tex}
+\addtocounter{chapter}{1}
+
+\begin{document}
+
+\chapter{Input/Output, operatori matematici e costrutto \texttt{if}}
+
+Questa dispensa propone esercizi sulla scrittura di algoritmi, in linguaggio C, utili alla comprensione delle operazioni aritmetiche e logiche tra numeri e del costrutto condizionale \texttt{if}. Si introducono anche le due funzioni principali della libreria \texttt{stdio.h}: \texttt{scanf()} e \texttt{printf()}.
+
+%\begin{figure}[ht!]
+%		\centering
+%		\includegraphics[width = 0.5\textwidth]{rtfm.jpg}
+%		\caption{Un consiglio da seguire.}
+%		\label{img:rtfm}
+%\end{figure}
+
+Nel caso in cui ci fossero delle domande riguardanti il funzionamento dei costrutti di base si pu\`o consultare come riferimento:
+\begin{itemize}
+		\item Il manuale del corso: ``Informatica: arte e mestiere'', D. Mandrioli, S. Ceri, L. Sbattella, P. Cremonesi, G. Cugola, McGraw-Hill Education;
+		\item Un manuale di C on-line: \url{http://www.cplusplus.com/}.
+\end{itemize}
+
+\textbf{Struttura di un programma C.}
+
+\lstinputlisting[style=cstyle]{src/basic.c}
+
+La riga di codice \texttt{Corpo del programma} non viene considerata dal compilatore, in quanto circondata dai caratteri \texttt{/*} e \texttt{*/}, che indicano l'apertura e la chiusura di un commento, rispettivamente. Nel caso in cui si voglia commentare da un punto fino alla fine della riga, pu\`o essere anche usata l'espressione \texttt{//}. L'istruzione \texttt{getchar()} non fa parte della soluzione. Si tratta di un'istruzione bloccante per mettere l'elaboratore in attesa di un carattere da tastiera. Senza questa istruzione, o istruzioni equivalenti (e.g., la \texttt{system(``PAUSE'')}), l'esecuzione del programma termina immediatamente senza permettere all'utente di visualizzare l'output a video.
+
+\section{Input e Output}
+
+Le funzioni principali per la comunicazione tra programma e utente in linguaggio C
+sono \texttt{scanf()} e \texttt{printf()}, entrambe fornite dalla libreria standard
+\texttt{stdio.h}.
+
+\begin{itemize}
+  \item \textbf{\texttt{printf()}}: serve per stampare informazioni a video.
+        La stringa di formato specifica come visualizzare i valori delle variabili.
+        Ad esempio:
+        \begin{clang}
+          int a = 5;
+          printf("La variabile a ha valore: %d\n", a);
+        \end{clang}
+        In questo caso, lo specificatore di formato \texttt{"\%d"} indica che
+        verrà stampato un numero intero.
+
+  \item \textbf{\texttt{scanf()}}: serve per leggere dati inseriti da tastiera.
+        Anche qui si utilizza una stringa di formato per specificare il tipo di
+        dato atteso, seguita dall’indirizzo di memoria della variabile in cui
+        salvare il valore letto. Ad esempio:
+        \begin{clang}
+          int b;
+          scanf("%d", &b);
+        \end{clang}
+        Lo specificatore \texttt{"\%d"} indica che ci si aspetta un intero e
+        l’operatore \texttt{\&} fornisce a \texttt{scanf()} l’indirizzo della
+        variabile in cui memorizzarlo.
+\end{itemize}
+
+I principali specificatori di formato sono:
+\begin{itemize}
+  \item \texttt{\%d} : intero decimale (\texttt{int}).
+  \item \texttt{\%f} : numero in virgola mobile a precisione singola (\texttt{float}).
+  \item \texttt{\%lf} : numero in virgola mobile a doppia precisione (\texttt{double}).
+  \item \texttt{\%c} : singolo carattere (\texttt{char}).
+  \item \texttt{\%s} : stringa di caratteri (array di \texttt{char} terminato da \texttt{'\textbackslash 0'}).
+  \item \texttt{\%x} : intero in formato esadecimale.
+  \item \texttt{\%o} : intero in formato ottale.
+\end{itemize}
+
+In generale, \texttt{printf()} corrisponde all’operazione di \emph{scrittura} su
+output, mentre \texttt{scanf()} corrisponde a quella di \emph{lettura} da input.
+
+
+
+\section{Operazioni matematiche}
+Si assume che il lettore sia familiare con i tipi di dato numerici previsti dal C (e.g., \texttt{int}, \texttt{float}) e con i rispettivi di caratteri che di specifica del formato (e.g., \verb|"%d"|, \verb|"%f"|). Inoltre, le operazioni matematiche essenziali necessarie alla comprensione degli esercizi proposti in questa sezione sono:
+
+\lstinputlisting[style=cstyle]{src/basic-math.c}
+
+Prima di procedere oltre, il lettore deve aver compreso il significato di questo frammento di codice (e.g., provando a compilarlo e ad eseguirlo).
+
+\section{Costrutto \texttt{if} e condizioni}
+
+Il costrutto \texttt{if} codifica un ramo condizionale. Il linguaggio C segue la seguente sintassi:
+
+\begin{clang}
+  if (condizione)
+    statement;
+  [else statement;]
+\end{clang}
+dove le parentesi quadre indicano che la parte \texttt{\textbf{else} statement;} \`e opzionale. 
+Come per tutti gli altri costrutti in C, se uno \texttt{statement} \`e una sola istruzione terminata da punto e virgola, non serve altro. Se invece uno \texttt{statement} \`e composto da pi\`u istruzioni terminate da punto e virgola, sar\`a necessario racchiuderlo tra parentesi graffe, ossia:
+
+\begin{clang}
+  if (condizione) {
+    istruzione1;
+    istruzione2;
+    ...
+  }
+\end{clang}
+
+La \texttt{condizione} \`e un'espressione booleana, ovvero un'istruzione che, quando valutata, risulta sempre in un valore pari a zero ($0$, falso) o uno ($1$, vero). Per comporre espressioni booleane si utilizzano operatori \emph{relazionali} e \emph{booleani}.
+
+\paragraph{Attenzione:} si osservi che in C, l'operazione di assegnamento \texttt{a = 3} \`e diversa dall'operazione di confronto \texttt{a == 3}. La prima \`e sempre valutata come vera ($1$, uno), mentre la seconda, ovviamente, dipende dal valore memorizzato in \texttt{a}. Perci\`o:
+\lstinputlisting[style=cstyle]{src/assegnamento_vs_confronto.c}
+
+
+\subsection{Esercizi}
+
+\input{ex/ex_difference}
+\input{ex/ex_sconto}
+\input{ex/ex_inv_tempo}
+\input{ex/ex_tempo}
+\input{ex/ex_resto}
+%\input{ex/ex_caratteri}
+
+\input{ex/ex_distanza}
+\input{ex/ex_distanza_abs}
+\input{ex/ex_basso_medio_alto}
+\input{ex/ex_triangolo}
+\input{ex/ex_bisestile}
+\input{ex/ex_logica}
+
+%to be checked
+%\input{ex/ex_tratti}
+
+\clearpage
+\section*{Soluzioni}
+\shipoutAnswer
+
+\end{document}

@@ -1,0 +1,15 @@
+\begin{Exercise}[label={ex:cesare}]
+		Implementare la seguente variante del cifrario di Cesare\footnote{\url{http://it.wikipedia.org/wiki/Cifrario_di_Cesare}}. Dopo aver acquisito una messaggio di massimo $160$ caratteri (alfabetici minuscoli), il programma dovr\`a chiedere all'utente una chiave (numero intero $K$, $1 < K < 25$).
+
+  	Il programma stamper\`a il messaggio cifrato, ottenuto traslando ogni lettera di $K$ posizioni in avanti (dove $K$ \`e la chiave).
+
+  	Dopo aver stampato il messaggio cifrato, il programma chiede all'utente di inserire un messaggio (che si assume sia stato cifrato con lo stesso algoritmo di cui sopra). Tale messaggio sar\`a dunque decifrato dal programma, il quale dovr\`a svolgere l'operazione inversa.
+
+  	Infine, il messaggio decifrato sar\`a stampato a video.
+		
+		Suggerimento: i caratteri minuscoli dalla a alla z corrispondono nella tabella ASCII alle cifre intere dalla $97$ alla $122$.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:cesare}]
+  \lstinputlisting[style=cstylesmall]{src/cesare.c}
+\end{Answer}

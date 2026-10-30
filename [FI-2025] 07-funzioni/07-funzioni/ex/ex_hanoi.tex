@@ -1,0 +1,26 @@
+\begin{Exercise}[label={ex:hanoi}]
+    La \emph{torre di Hanoi} è un famoso rompicapo matematico composto da tre aste "\texttt{A}", "\texttt{B}" e "\texttt{C}" e un numero \texttt{N} di dischi di grandezza decrescente.
+    Il rompicapo inizia con i dischi impilati in ordine crescente di dimensione sulla prima asta (\texttt{A}), il disco più piccolo in cima.
+    L'obiettivo del gioco è spostare l'intera pila di dischi dalla prima asta (\texttt{A}) alla terza asta (\texttt{C}), rispettando le seguenti regole:
+    \begin{itemize}
+        \item Si può spostare solo un disco alla volta.
+        \item Non si può posizionare un disco più grande sopra uno più piccolo.
+    \end{itemize}
+    Si scriva una funzione che risolva il problema in modo ricorsivo per un numero \texttt{N} di dischi dato in input,
+    stampando ad ogni mossa il disco che viene spostato, l'asta di partenza e l'asta di destinazione.
+
+    \textbf{Esempio:} Per \texttt{N = 3}, l'output dovrebbe essere:
+    \begin{verbatim}
+    Sposta il disco 1 da A a C
+    Sposta il disco 2 da A a B
+    Sposta il disco 1 da C a B
+    Sposta il disco 3 da A a C
+    Sposta il disco 1 da B a A
+    Sposta il disco 2 da B a C
+    Sposta il disco 1 da A a C
+    \end{verbatim}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:hanoi}]
+  	\lstinputlisting[style=cstylesmall]{src/hanoi.c}
+\end{Answer}

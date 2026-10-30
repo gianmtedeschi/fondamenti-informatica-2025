@@ -1,0 +1,32 @@
+\begin{Exercise}[label={ex:studenti}]
+    Dato un file di testo "dati.txt" contenente i dati relativi agli studenti
+    immatricolati al primo anno della Facoltà di Ingegneria. In particolare, le informazioni
+    sono memorizzate nel file con uno studente per riga nel seguente formato:
+    \begin{itemize}
+        \item matricola (intero);
+        \item corso di laurea (intero);
+    \end{itemize}
+    Sia dato un secondo file di testo, "indirizzi.txt" che contiene l'indirizzo di ogni studente.
+    In particolare, in ogni linea, separati da uno spazio: 
+    \begin{itemize}
+        \item matricola (intero);   
+        \item nome (stringa di al più 20 caratteri);
+        \item cognome (stringa di al più 30 caratteri);
+        \item via (stringa di al più 30 caratteri);
+        \item città (stringa di al più 20 caratteri);
+        \item cap (intero).
+    \end{itemize}
+    Si scriva un programma che:
+    \begin{enumerate}
+        \item a partire dai file "dati.txt" e "indirizzi.txt" costruisca una tabella
+        contenente per ogni studente: matricola, nome, cognome, via, città, cap e corso di laurea.
+        \item a partire dalla tabella e dato input un intero C che rappresenta un corso di laurea,
+        stampi la percentuale di studenti iscritti a quel corso.
+        \item scriva su un terzo file di testo "milano.txt", nome, cognome e numero di matricola
+        di tutti gli studenti che abitano a Milano.
+    \end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:studenti}]
+  	\lstinputlisting[style=cstylesmall]{src/studenti.c}
+\end{Answer}

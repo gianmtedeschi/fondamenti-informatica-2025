@@ -1,0 +1,49 @@
+\begin{Exercise}[label={ex:implicazione}]
+		\Question Scrivere la tabella di verit\'a della proposizione $A \Rightarrow B$ (implicazione logica), sapendo che essa \`e equivalente alla proposizione $!A \; || \; B$ (due proposizioni sono equivalenti se la loro tabella di verit\`a \`e identica).
+
+		\Question Scrivere la tabella di verit\`a della proposizione $A \Leftrightarrow B$ (co-implicazione logica), sapendo che essa \`e equivalente alla proposizione $A \Rightarrow B \; \&\& \; B \Rightarrow A$.
+		
+		\Question Mostrare che la proposizione $A \Rightarrow B$ non \`e equivalente alla proposizione $A \; || \; !B$.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:implicazione}]
+
+\begin{enumerate}
+	\item Tabella di verit\'a di $A \Rightarrow B$:
+	\begin{table}[H]
+		\centering
+			\begin{tabular}{|c | c | c | c|}\hline
+				A & B & !A & !A || B \\ \hline
+				0 & 0 & 1  & 1       \\ \hline
+				0 & 1 & 1  & 1       \\ \hline
+				1 & 0 & 0  & 0       \\ \hline
+				1 & 1 & 0  & 1      \\ \hline
+			\end{tabular}
+	\end{table}
+	\item Tabella di verit\'a di $A \Leftrightarrow B$:
+	\begin{table}[H]
+		\centering
+			\begin{tabular}{|c | c | c | c | c|}\hline
+				A & B & A $\Rightarrow$ B & B $\Rightarrow$ A & A $\Rightarrow$ B \&\& B $\Rightarrow$ A \\ \hline
+				0 & 0 & 1  & 1   & 1    \\ \hline
+				0 & 1 & 1  & 0  & 0     \\ \hline
+				1 & 0 & 0  & 1  & 0     \\ \hline
+				1 & 1 & 1 & 1     & 1   \\ \hline
+			\end{tabular}
+	\end{table}
+	\item Confrontiamo le due tabelle di verit\'a:
+	\begin{table}[H]
+		\centering
+			\begin{tabular}{|c | c | c | c | c|}\hline
+				A & B & !B & A || !B & A $\Rightarrow$ B \\ \hline
+				0 & 0 & 1  & 1  & 1     \\ \hline
+				0 & 1 & 0 & 0  & 1   \\ \hline
+				1 & 0 & 1  & 1   & 0    \\ \hline
+				1 & 1 & 0  & 1     & 1 \\ \hline
+			\end{tabular}
+	\end{table}
+	Le due tabelle di verit\'a non sono identiche, per cui le proposizioni non sono equivalenti.
+	
+\end{enumerate}
+
+\end{Answer}

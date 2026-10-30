@@ -1,0 +1,17 @@
+\begin{Exercise}[label={ex:switch_easy}]
+
+    \Question Realizzare un programma che legga da input un voto (carattere da 'A' ed 'E') e ne stampi il significato (A significa ottimo, E significa gravemente insuff.,etc.)
+    
+    \Question Supporre che l'utente possa inserire valori definiti con una codifica errata. Si ripeta l'acquisizione dei dati finchè non vengono inseriti valori validi.
+
+\end{Exercise}
+
+\begin{Answer}[ref={ex:switch_easy}]
+		\Question \lstinputlisting[style=cstyle]{src/switch_easy.c}
+
+        \Question \lstinputlisting[style=cstyle]{src/switch_easy_2.c}
+
+        \paragraph{Nota:} alternativamente, l'esercizio poteva essere risolto utilizzando una serie di costrutti \texttt{if} nidificati
+
+        \lstinputlisting[style=cstyle]{src/switch_easy_3.c}
+\end{Answer}

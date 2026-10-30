@@ -1,0 +1,23 @@
+\begin{Exercise}[label={ex:magazzino}]
+    Si vuole realizzare un programma per la gestione di un magazzino.
+    A tal scopo definiamo un'opportuna struttura \texttt{prodotto} definita da:
+    \begin{itemize}
+        \item un campo \texttt{id} di tipo intero che rappresenta il codice univoco del prodotto;
+        \item un campo \texttt{nome} di tipo stringa (array di caratteri) di lunghezza massima 50 che rappresenta il nome del prodotto;
+        \item un campo \texttt{quantita} di tipo float che rappresenta la quantità disponibile del prodotto;
+        \item un campo \texttt{prezzo} di tipo float che rappresenta il prezzo del prodotto.
+    \end{itemize}
+
+    Si scriva un programma che, dichiarato uno array, di massimo 10 elementi di tipo \texttt{prodotto} (il magazzino), permetta di:
+    \begin{itemize}
+        \item inserire un nuovo prodotto nel magazzino (chiedendo all'utente di inserire i valori dei campi);
+        \item incremetare la quantità di un prodotto esistente (dato il suo \texttt{id});
+        \item visualizzare tutti i prodotti presenti nel magazzino con i loro dettagli;
+        \item vendere un prodotto (dato il suo \texttt{id} e la quantità da vendere), aggiornando la quantità disponibile;
+        \item uscire dal programma.
+    \end{itemize}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:magazzino}]
+  	\lstinputlisting[style=cstylesmall]{src/magazzino.c}
+\end{Answer}

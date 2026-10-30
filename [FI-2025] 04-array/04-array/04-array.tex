@@ -1,0 +1,59 @@
+\documentclass[oneside]{scrbook}
+
+\input{../preamble.tex}
+\addtocounter{chapter}{3}
+
+\begin{document}
+\chapter{Array numerici}
+Questa dispensa propone esercizi sulla scrittura di algoritmi, in linguaggio C, utili alla comprensione dei vettori (array). 
+
+La dichiarazione di un vettore di elementi omogenei in C avviene grazie alla seguente dichiarazione:
+\begin{lstlisting}[style=cstyle]
+void main(){
+
+tipo_variabile nome_variabile[numero_elementi];
+
+istruzioni;
+
+}
+\end{lstlisting}
+dove \texttt{tipo\_variabile} \`e il tipo degli elementi del vettore e \texttt{numero\_elementi}  \`e la lunghezza del vettore (considerata una costante da qui in poi). Solitamente la lunghezza del vettore viene dichiarato come una costante tramite la parola chiave \texttt{\#define} per migliorare la leggibilit\`a del codice.
+
+Per accedere a singoli elementi dell'array utilizzeremo degli indici che varieranno tra $0$ e \texttt{numero\_elementi} - $1$. Per accedere ad un elemento del vettore si utilizzano le parentesi quadre, ad esempio:
+\begin{lstlisting}[style=cstyle]
+void main(){
+
+int vettore[10];
+
+vettore[1] = 4;
+
+}
+\end{lstlisting}
+il precedente programma dichiara un vettore di interi di dimensione $10$ e successivamente inserisce il valore $4$ nel secondo elemento del vettore.
+
+Un vettore ha dimensioni fisse. Esse devono essere specificate alla dichiarazione del programma. Non \`e possibile modificare le dimensioni di un vettore durante l'esecuzione del programma.
+
+\clearpage
+\section{Esercizi}
+
+% Facili
+\input{ex/ex_inversione}
+\input{ex/ex_coppie}
+\input{ex/ex_pari_dispari}
+\input{ex/ex_uguaglianza}
+\input{ex/ex_indici}
+\input{ex/ex_massimo}
+
+\input{ex/ex_set}
+\input{ex/ex_operazioni_set}
+
+\input{ex/ex_mischia}
+\input{ex/ex_media_varianza}
+\input{ex/ex_isto_divisori}
+
+
+\clearpage
+\section*{Soluzioni}
+\shipoutAnswer
+
+\end{document}

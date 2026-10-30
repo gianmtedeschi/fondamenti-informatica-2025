@@ -1,0 +1,59 @@
+\begin{Exercise}[label={ex:facebook}]
+  \Question Si definiscano le seguenti variabili che specificano le strutture dati per rappresentare i messaggi scambiati attraverso Facebook e ai profili degli utenti:
+  		\begin{itemize}
+  				\item una struttura che definisca un'utente, con nome, cognome e e-mail, tutti composti da caratteri alfanumerici;
+  				\item una struttura che definisca un messaggio, con un contenuto alfanumerico, un mittente scelto tra gli utenti, un numero fissato di destinatari e i destinatari, anch'essi scelti tra gli utenti (fino ad un massimo di 256).
+  		\end{itemize}
+
+		\Question Definire, usando il linguaggio C, un'appropriata variabile per memorizzare le informazioni relative a 10 utenti e 10 messaggi. Queste variabili dovranno essere chiamate \texttt{utenti\_facebook} e \texttt{messaggi\_inviati}.
+
+		\Question Scrivere in linguaggio C, aggiungendo eventualmente opportune dichiarazioni di variabili, un frammento di codice che permetta di visualizzare a video l'indirizzo email di tutti gli utenti che hanno spedito almeno un messaggio e che non siano tra i destinatari di tale messaggio. Si presupponga che la variabile \texttt{messaggi\_inviati} sia inizializzata correttamente con le informazioni relative a 10 messaggi. Si presupponga inoltre che l'indirizzo email sia identificatore univoco di un utente: pertanto si può utilizzare l'indirizzo email per verificare se due utenti sono lo stesso utente.
+		
+\end{Exercise}
+
+\begin{Answer}[ref={ex:facebook}]
+
+\begin{clangsmall}
+typedef struct {
+  char nome[24];
+  char cognome[24];
+  char email[64];
+} Utente;
+
+typedef struct {
+  char contenuto[256];
+  Utente mittente;
+  int numDestinatari;
+  Utente destinatari[256];
+} Messaggio;
+\end{clangsmall}
+
+\begin{clangsmall}
+Utente utenti_facebook[10];
+Messaggio messaggi_inviati[10];		
+\end{clangsmall}
+
+Gli utenti che hanno spedito almeno un messaggio sono necessariamente presenti come mittenti nella variabile \texttt{messaggi\_inviati}:
+
+\begin{clangsmall}
+void main () {
+  int i, j;
+  Utente utenti_facebook[10];
+  Messaggio messaggi_inviati[10];		
+
+  for (i = 0; i < 10; i++) {
+    j = 0;
+
+    //ricerca destinatario.email != mittente.email con strcmp()
+    while (j < messaggi_inviati[i].numDestinatari &&
+              strcmp(messaggi_inviati[i].mittente.email,
+                     messaggi_inviati[i].destinatari[j].email) != 0) {
+      j++;
+    }
+
+    if (j == messaggi_inviati[i].numDestinatari) //non trovato
+      printf("%s", Messaggi[i].mittente.email);
+}
+    \end{clangsmall}
+	
+\end{Answer}

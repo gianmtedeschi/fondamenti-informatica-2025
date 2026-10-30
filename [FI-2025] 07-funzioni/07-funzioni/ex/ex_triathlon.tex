@@ -1,0 +1,16 @@
+\begin{Exercise}[label={ex:triathlon}]
+    Si scriva un programma per la gestione degli atleti che partecipano a una gara di triathlon.
+    Ogni atleta è caratterizzato da un nome (stringa di massimo 50 caratteri), da un identificativo e un tempo totale di gara (in ore, minuti e secondi).
+    Si implementino le seguenti funzionalità:
+    \begin{itemize}
+        \item Definizione delle strutture dati necessarie per rappresentare un atleta e una lista di atleti.
+        \item Scrivere una funzione \texttt{somma\_tempo} che riceve in input due tempi di gara e restituisce la somma dei due tempi.
+        \item Scrivere una funzione \texttt{verifica\_tempo\_minore} che ricevuti due tempi di gara restituisce 1 se la prima variabile è minore o uguale alla seconda, 0 altrimenti.
+        \item Scrivere una funzione \texttt{calcola\_tempo\_totale} che riceve in input un atleta e calcola il tempo totale di tutta la competizione.
+        \item Scrivere una funzione \texttt{stampa\_miglior\_tempo} che riceve in input un'array di atleti e la sua dimensione e stampa a schermo l'id e il cognome dell'atleta con il tempo tempo totale migliore.
+    \end{itemize}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:triathlon}]
+  	\lstinputlisting[style=cstylesmall]{src/triathlon.c}
+\end{Answer}

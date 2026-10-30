@@ -1,0 +1,30 @@
+\begin{Exercise}[label={ex:archivio}]
+    Un file di testo "archivio.txt" contiene i dati (primo autore, titolo, numero di copie possedute, 
+    numero di copie in prestito) relativi ai differenti volumi conservati presso una biblioteca.
+    Più precisamente, ogni riga del file contiene nell'ordine, separati da uno spazio bianco:
+    \begin{itemize}
+        \item autore (al più 23 caratteri senza spazi)
+        \item titolo (al più 55 caratteri senza spazi)
+        \item numero di copie possedute (intero)
+        \item numero di copie in prestito (intero)
+    \end{itemize}
+
+    Si realizzi un programma C che:
+    \begin{enumerate}
+        \item Legga il contenuto di "archivio.txt" e costruisca in memoria un vettore V di strutture
+        corrispondenti (si supponga che il file "archivio.txt" non possa contenere più di 30 righe). 
+        Si stampi a video il contenuto del vettore.
+        \item A partire da V, costruisca una lista L di interi contenente per ciascun volume il 
+        numero di copie disponibili nella biblioteca, ovvero la differenza fra il numero di copie 
+        possedute e il numero di copie in prestito. Si stampi a video il contenuto della lista L.
+        \item Utilizzando L per ottenere la somma delle copie disponibili e V per la somma delle
+        copie possedute, calcoli il rapporto fra volumi disponibili e volumi posseduti.
+        \item  Utilizzando la lista di interi L, stampi il numero di riga di "archivio.txt" 
+        relativo al volume con più copie disponibili. In caso di più volumi con pari numero di copie 
+        disponibili, qualunque riga relativa a questi ultimi è considerata una risposta corretta.
+    \end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:archivio}]
+  	\lstinputlisting[style=cstylesmall]{src/archivio.c}
+\end{Answer}

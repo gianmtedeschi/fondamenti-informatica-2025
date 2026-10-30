@@ -1,0 +1,131 @@
+\documentclass[oneside]{scrbook}
+
+\input{../preamble.tex}
+\addtocounter{chapter}{5}
+
+\begin{document}
+\chapter{Struct}
+Questa dispensa propone esercizi sulla scrittura di algoritmi, in linguaggio C, utili alla comprensione della definizione di strutture e di tipi, oltre ad un riepilogo sulla codifica dei numeri con complemento a due.
+
+I tipi di dato strutturato sono dichiarabili in C tramite la parola chiave \texttt{struct}
+\begin{lstlisting}[style=cstyle]
+void main(){
+
+struct {
+	tipo_campo1 nome_campo1;
+	tipo_campo2 nome_campo2;
+	...
+} nome_struttura;
+
+istruzioni;
+
+}
+\end{lstlisting}		
+
+A questo punto potremo utilizzare \texttt{nome\_struttura} come se fosse una variabile. Per accedere ai campi della struttura si utilizza la sintassi \texttt{nome\_struttura.nome\_campo}. Grazie ad esso possiamo accedere (leggere o scrivere) nei campi della struttura. L'assegnamento tra strutture \`e possibile solo se le strutture sono dello stesso tipo (stessi campi, per nome e tipo, con stesso ordine di dichiarazione). Non \`e possibile fare confronti tra strutture in maniera automatica.
+		
+Oltre ad i tipi nativi del C (ad esempio \texttt{int}, \texttt{char} o \texttt{float}) \`e possibile dichiarare dei tipi definiti dall'utente tramite la parola chiave \texttt{typedef}. Ad esempio, volendo dichiarare dei vettori della stessa dimensione \texttt{n\_elementi}:
+
+\begin{lstlisting}[style=cstyle]
+#define LEN n_elementi
+
+typedef tipo_variabile Nuovo_nome_tipo[LEN];
+
+void main(){
+
+Nuovo_nome_tipo nome_variabile;
+
+istruzioni;
+}
+\end{lstlisting}
+\`E buona norma dichiarare nuovi tipi con nomi che inizino con una \textbf{lettera maiuscola}, con un prefisso o con un suffisso scelto.
+		
+La tecnica della dichiarazione di tipo si pu\`o combinare con la dichiarazione di strutture. Ad esempio:
+\begin{lstlisting}[style=cstyle]
+#define LEN n_elementi
+
+typedef tipo_variabile Nome_tipo[LEN][LEN];
+
+typedef struct {
+	tipo_campo1 nome_campo1;
+	tipo_campo2 nome_campo2;
+	...
+} Nome_tipo_struttura;
+
+void main(){
+
+Nome_tipo nome_variabile;
+Nome_tipo_struttura nome_struttura;
+
+istruzioni;
+}
+\end{lstlisting}
+La definizione di un tipo non implica l'istanziazione di una variabile di quel tipo. La dichiarazione della variabile avverrà di seguito.
+
+\paragraph{Enum}
+Gli enumerated types contengono un elenco di costanti che possono essere indirizzate con valori integer. Per dichiarare tali tipi si utilizza \texttt{enum}; vengono dichiarati i tipi e le variabili come nell'esempio che segue:
+\begin{lstlisting}[style=cstyle]
+	enum colori {rosso, giallo, verde, blu} pennarello;
+	enum giorni {lun,mar,mer,gio,ven,sab,dom} settimana;
+	enum colori pulsante, nastro;
+\end{lstlisting}
+
+In tale esempio viene dichiarato \texttt{colori} come enumerated type e la variabile \texttt{pennarello} con $4$ valori accettabili definiti, mentre la variabile \texttt{settimana} di tipo \texttt{giorni} ha $7$ valori accettabili definiti. Le variabili \texttt{pulsante} e \texttt{nastro} sono di tipo \texttt{colori}. Ogni item nell'elenco di valori accettabili \`e detto enumeration constant. Il C mappa ogni enumeration constant ad un'intero, per cui \`e ad esempio possibile scrivere:
+\begin{lstlisting}[style=cstyle]
+	settimana = verde;
+\end{lstlisting}
+che come risultato fa si che settimana abbia valore $2$, perch\`e di default a ogni membro dell'elenco di variabili \`e assegnato un valore incrementale partendo da $0$ per il primo valore. \`E comunque possibile definire valori diversi agli elementi:
+\begin{lstlisting}[style=cstyle]
+	enum colori {rosso=10, giallo=30, verde, blu=giallo};
+\end{lstlisting}
+
+Un ulteriore esempio relativo all'assegnazione di valori diversi \`e il seguente:
+\begin{lstlisting}[style=cstyle]
+	enum escapes {bell='\a', backspace='\b', tab='\t', newline='\n', vtab='\v', return='\r'};
+\end{lstlisting}
+\`E anche possibile iniziare ad assegnare i valori da un valore iniziale diverso da $0$:
+\begin{lstlisting}[style=cstyle]
+	enum months (jan=1,feb,mar,...dec);
+\end{lstlisting}
+dove \`e implicito che febbraio sia corrispondente al valore $2$, marzo al $3$ e cos\`i via.
+
+				
+%\paragraph{Riepilogo: IEEE 754-1985 standard}
+%Decimale -> IEEE standard
+%\begin{itemize}
+		%\item Definisco il bit di segno $S = 0$ per positivo e $S = 1$ per negativo
+		%\item Codifico in virgola fissa in base 2, parte frazionaria e parte intera
+		%\item Porto il numero binario in forma normalizzata in base 2
+		%\item Definisco a 23 bit come la mantissa $M$ senza il primo bit (sempre 1)
+		%\item Calcolo l'esponente $E$ (aggiungo 127 a quello che ho trovato durante la normalizzazione)
+		%\item Compongo il numero $S/E/M$
+%\end{itemize}
+%
+%IEEE standard -> Decimale
+%\begin{itemize}
+		%\item Decompongo il numero $S/E/M$
+		%\item Calcolo l'esponente $E$ e sottraggo 127
+		%\item Sposto la virgola in base all'esponente alla mantissa $M$
+		%\item Converto in decimale la parte intera
+		%\item Converto in decimale la parte frazionaria
+		%\item Definisco il bit di segno $S = 0$ per positivo e $S = 1$ per negativo
+%\end{itemize}
+	
+\section{Esercizi}
+
+\input{ex/ex_capocannoniere}
+\input{ex/ex_libretto}
+\input{ex/ex_magazzino}
+\input{ex/ex_azienda}
+\input{ex/ex_facebook}
+%\input{ex/ex_complemento}
+%\input{ex/ex_cp2}
+%\input{ex/ex_ieee_standard}
+%\input{ex/ex_binary}
+%\input{ex/ex_ieee_standard_c}
+
+\clearpage
+\section*{Soluzioni}
+\shipoutAnswer
+
+\end{document}

@@ -1,0 +1,34 @@
+\begin{Exercise}[label={ex:logica}]
+  	Assumendo che \texttt{c1} e \texttt{c2} siano due variabili di tipo char, che memorizzano rispettivamente i valori \verb|'e'| ed \verb|'m'| indicare, per ognuna delle espressioni logiche:
+  
+	  \begin{enumerate}
+			  \item se l'espressione \`e vera o falsa (per i valori delle variabili sopra indicati);
+			  \item se \`e sempre vera per qualsiasi valore che le due variabili possono assumere;
+			  \item se \`e sempre falsa per qualsiasi valore che le due variabili possono assumere.
+	  \end{enumerate}
+
+  	Si fornisca una giustificazione per ogni risposta inserita nella tabella (risposte senza giustificazione potranno essere considerate nulle).
+
+		\begin{enumerate}
+			  \item \verb#((c1 != 'e') && (c2 == 'm')) || ((c1 != 'h') && (c2 == 'm'))#
+			  \item \verb#(c1 < 'g') || !((c1 <= 'g') && (c1 != 'g'))#
+			  \item \verb#(c1 <= 'm') || ((c2 > 'm') || !(c2 > c1))#
+		\end{enumerate}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:logica}]
+\begin{enumerate}
+	  \item \`E vera perch\'e \`e vero il secondo disgiunto (di cui \`e vero sia il primo congiunto, in quanto \texttt{c1} vale \verb|'e'|, che il secondo congiunto, in quanto \texttt{c2} vale \verb|'m'|). L'espressione, essendo vera, ovviamente non \`e sempre falsa. Inoltre non \`e sempre vera, per esempio sarebbe falsa se \texttt{c2} valesse \verb|'k'| o qualsiasi altro valore diverso da \verb|'m'|.
+  	\item \`E sempre vera perch\'e, in base alla legge di De Morgan, \`e equivalente a
+	  \begin{center}
+	  		\verb#(c1 <'g') || (c1 > 'g') || (c1 == 'g')#
+	  \end{center}
+	  quindi la formula non \`e sempre falsa.
+	  \item \`E sempre vera perch\'e equivalente alla formula
+	    \begin{center}
+	  		\verb#(c1 <= 'm') || (c2 > 'm') || (c2 <= c1)#
+	  \end{center}
+	  che \`e identicamente vera: infatti sarebbe falsa solo se fossero falsi tutti e tre i suoi disgiunti, cosa che non pu\`o essere, perch\'e se sono falsi i primi due (cio\`e se \verb#c1 > 'm'# e \verb#c2 <= 'm'#) allora \verb#c2 < c1#, quindi il terzo \`e vero. Quindi la formula non \`e sempre falsa.
+\end{enumerate}
+  
+\end{Answer}

@@ -1,0 +1,242 @@
+\documentclass[oneside]{scrbook}
+
+\input{../preamble.tex}
+\addtocounter{chapter}{7}
+\begin{document}
+
+\chapter{Memoria Dinamica e Liste}
+
+Questa dispensa approfondisce la gestione dinamica della memoria in C e l'implementazione delle liste concatenate, strutture dati fondamentali quando la quantità di dati da gestire non è nota a priori.
+
+\section{Allocazione Dinamica della Memoria}
+
+In un programma C, la memoria è partizionata in diverse zone. Le variabili statiche e automatiche (quelle locali alle funzioni) risiedono nello \textbf{Stack}. Tuttavia, spesso non si conosce il numero esatto di dati da allocare fino al momento dell'esecuzione (run-time).
+
+
+Per gestire questi casi, si utilizza lo \textbf{Heap} (Mucchio), un'area di memoria dedicata alle variabili dinamiche. A differenza delle variabili automatiche, quelle dinamiche:
+\begin{itemize}
+    \item Vengono allocate e de-allocate esplicitamente dal programmatore.
+    \item Sono accessibili esclusivamente tramite puntatori.
+\end{itemize}
+
+\paragraph{Funzioni \texttt{malloc} e \texttt{free}}
+
+La libreria standard \texttt{stdlib.h} fornisce le funzioni necessarie per l'allocazione dinamica della memoria.
+
+\begin{itemize}
+    \item \textbf{\texttt{malloc} (Memory Allocation)}: Alloca un blocco di byte contigui nello Heap. Restituisce un puntatore generico \texttt{void*} all'indirizzo base del blocco allocato. Se lo spazio non è sufficiente, restituisce \texttt{NULL}.
+    \item \textbf{\texttt{free}}: De-alloca un blocco di memoria precedentemente riservato, rendendolo disponibile per nuovi utilizzi.
+\end{itemize}
+
+Esempio di allocazione di un intero:
+\begin{lstlisting}[style=cstyle]
+int *ptr;
+// Allocazione nello Heap: sizeof calcola i byte necessari
+ptr = (int*) malloc(sizeof(int)); 
+
+if (ptr != NULL) {
+    *ptr = 10;      // Utilizzo della variabile dinamica
+    printf("%d", *ptr);
+    free(ptr);      // Rilascio della memoria
+}
+\end{lstlisting}
+
+\section{Liste Concatenate}
+
+Le liste sono strutture dati dinamiche che possono crescere e decrescere durante l'esecuzione. A differenza degli array, gli elementi di una lista non sono necessariamente contigui in memoria; sono sparpagliati nello Heap e collegati logicamente tramite puntatori.
+
+
+Ogni elemento (o nodo) contiene due parti fondamentali:
+\begin{enumerate}
+    \item \textbf{Dato}: l'informazione utile.
+    \item \textbf{Link}: un puntatore al nodo successivo.
+\end{enumerate}
+L'ultimo nodo della lista ha il puntatore impostato a \texttt{NULL} per indicare la fine della sequenza.
+
+\subsection{Definizione del Tipo}
+La definizione della struttura è ricorsiva (o auto-referenziale), poiché contiene un puntatore a una struttura dello stesso tipo.
+
+\begin{lstlisting}[style=cstyle]
+typedef struct EL {
+    int dato;           // Informazione (es. intero)
+    struct EL * prox;   // Link al prossimo elemento
+} ElemLista;
+
+typedef ElemLista * ListaDiElem; // Puntatore alla testa
+\end{lstlisting}
+
+\section{Operazioni sulle Liste}
+
+Le operazioni vengono implementate tramite funzioni che manipolano i puntatori. Spesso queste funzioni restituiscono il nuovo puntatore alla testa della lista, poiché le operazioni di inserimento o cancellazione potrebbero modificarlo.
+
+\subsection{Inizializzazione e Calcolo Dimensione}
+
+Una lista vuota è rappresentata semplicemente dal valore \texttt{NULL}.
+
+\begin{lstlisting}[style=cstyle]
+ListaDiElem inizializza() {
+    return NULL; // Lista vuota
+}
+
+// Calcolo della dimensione (Versione Iterativa)
+int dimensione(ListaDiElem lista) {
+    int count = 0;
+    while (lista != NULL) {   // Scorre fino alla fine
+        lista = lista->prox;  // Avanza al prossimo nodo
+        count++;
+    }
+    return count; // Restituisce il conteggio
+}
+\end{lstlisting}
+
+Esiste anche una versione ricorsiva, basata sull'induzione: la lunghezza è 0 se la lista è vuota, altrimenti è 1 + la lunghezza del resto della lista.
+
+\begin{lstlisting}[style=cstyle]
+int dimensione(ListaDiElem lista) {
+    // 1. Caso base: siamo alla fine della lista (o vuota)
+    if (lista == NULL) {
+        return 0;
+    } else {
+        // 2. Passo ricorsivo: 1 (me stesso) + la dimensione del resto
+        return 1 + dimensione(lista->prox);
+    }
+}
+\end{lstlisting}
+
+\subsection{Inserimento}
+
+L'inserimento richiede l'allocazione dinamica di un nuovo nodo e l'aggiornamento dei collegamenti.
+
+\paragraph{Inserimento in Testa}
+È l'operazione più efficiente ($O(1)$). Il nuovo nodo punta alla vecchia testa, e diventa la nuova testa.
+
+
+\begin{lstlisting}[style=cstyle]
+ListaDiElem inserisciTesta(ListaDiElem lista, int elem) {
+    ListaDiElem punt;
+    punt = (ListaDiElem) malloc(sizeof(ElemLista)); // Alloca
+    if(punt == NULL) {
+        // Gestione errore di allocazione
+        return lista; // Ritorna la lista originale
+    }
+
+    punt->dato = elem;
+    punt->prox = lista; // Collega al vecchio primo elemento
+    
+    return punt;        // Ritorna il nuovo primo elemento
+}
+\end{lstlisting}
+
+\paragraph{Inserimento in Coda}
+Richiede la scansione di tutta la lista per trovare l'ultimo elemento e agganciarvi il nuovo nodo.
+
+\begin{lstlisting}[style=cstyle]
+ListaDiElem inserisciCoda(ListaDiElem lista, int elem) {
+    ListaDiElem punt, cur = lista;
+    punt = (ListaDiElem) malloc(sizeof(ElemLista));
+    punt->dato = elem;
+    punt->prox = NULL; // Sarà l'ultimo
+
+    if (lista == NULL) {
+        return punt; // Se vuota, il nuovo nodo è la testa
+    } else {
+        while (cur->prox != NULL) // Cerca l'ultimo
+            cur = cur->prox;
+        cur->prox = punt; // Aggancia
+        return lista;
+    }
+}
+\end{lstlisting}
+
+\paragraph{Inserimento Ordinato}
+Mantiene la lista ordinata cercando la posizione corretta. Richiede due puntatori: \texttt{puntCor} (corrente) e \texttt{puntPrec} (precedente) per gestire l'inserimento nel mezzo.
+
+\begin{lstlisting}[style=cstyle]
+ListaDiElem inserisciOrd(ListaDiElem lista, int elem) {
+    ListaDiElem punt, puntCor = lista, puntPrec = NULL;
+    
+    // Trova la posizione
+    while (puntCor != NULL && elem > puntCor->dato) {
+        puntPrec = puntCor;
+        puntCor = puntCor->prox;
+    }
+    punt = (ListaDiElem) malloc(sizeof(ElemLista));
+    punt->dato = elem;
+    if (puntPrec != NULL) { // Inserimento interno o in coda
+        punt->prox = puntCor;
+        puntPrec->prox = punt;
+        return lista;
+    } else { // Inserimento in testa
+        punt->prox = lista;
+        return punt;
+    }
+}
+\end{lstlisting}
+
+\subsection{Cancellazione}
+
+Per rimuovere un nodo, bisogna "scavalcarlo" aggiornando il puntatore del nodo precedente, e poi liberare la memoria con \texttt{free}.
+
+
+Ecco un esempio di funzione ricorsiva per cancellare la prima occorrenza di un elemento:
+
+\begin{lstlisting}[style=cstyle]
+ListaDiElem cancella(ListaDiElem lista, int elem) {
+    ListaDiElem puntTemp;
+    if (lista != NULL) {
+        if (lista->dato == elem) {
+            // Elemento trovato: salva il prossimo e libera il corrente
+            puntTemp = lista->prox;
+            free(lista);
+            return puntTemp; // Il prossimo diventa la testa (o il link corrente)
+        } else {
+            // Ricorsione sul resto della lista
+            lista->prox = cancella(lista->prox, elem);
+        }
+    }
+    return lista;
+}
+\end{lstlisting}
+
+\subsection{De-allocazione Completa}
+Quando una lista non serve più, è fondamentale liberare tutta la memoria allocata scorrendo la lista e chiamando \texttt{free} su ogni nodo.
+
+\begin{lstlisting}[style=cstyle]
+void eliminaLista(ListaDiElem lista) {
+    ListaDiElem temp;
+    while (lista != NULL) {
+        temp = lista->prox; // Salva il riferimento al prossimo
+        free(lista);        // Libera il corrente
+        lista = temp;       // Avanza
+    }
+}
+\end{lstlisting}
+
+\section{Esercizi}
+
+% Facili
+\input{ex/ex_minimo_pari.tex}
+\input{ex/ex_somma_multipli.tex}
+\input{ex/ex_duplicati.tex}
+\input{ex/ex_monotona.tex}
+\input{ex/ex_inverti.tex}
+\input{ex/ex_inserimento_dopo_n.tex}
+
+% Difficili
+\input{ex/ex_picchi.tex}
+\input{ex/ex_compresse.tex}
+\input{ex/ex_differenza_simmetrica.tex}
+\input{ex/ex_trova_k.tex}
+\input{ex/ex_ondulatorio.tex}
+\clearpage
+\input{ex/ex_flatten.tex}
+
+\clearpage
+\section*{Soluzioni}
+\shipoutAnswer
+
+\clearpage
+\section*{Libreria Liste}
+\lstinputlisting[style=cstylesmall]{src/lista.c}
+
+\end{document}

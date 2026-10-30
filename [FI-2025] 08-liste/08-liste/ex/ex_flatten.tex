@@ -1,0 +1,27 @@
+\begin{Exercise}[label={ex:flatten}]
+    Si definisca una struttura dati per una lista concatenata in cui ogni nodo è 
+    costituito da un valore intero, un puntatore al nodo successivo e un puntatore opzionale (\texttt{child}) 
+    che identifica la testa di una sotto-lista gerarchica. 
+    Si scriva un programma che costruisce tale struttura e implementa una funzione di inserimento e di stampa che gestisca
+    la gerarchizzazione della struttura ed una funzione di "appiattimento".
+    (flatten) che linearizza la gerarchia: ogni sotto-lista puntata da \texttt{child} deve essere inserita nella lista principale 
+    immediatamente dopo il nodo genitore, modificando i puntatori esistenti senza allocare nuovi nodi. 
+    Il programma visualizzi a video la sequenza lineare risultante.
+    
+    \textbf{Esempio:} data la lista gerarchica
+    \begin{verbatim}
+        1 -> 2 -> 5
+             |
+             3 -> 4
+                  |
+                  10
+    \end{verbatim}
+    la lista appiattita sarà:
+    \begin{verbatim}
+        1 -> 2 -> 3 -> 4 -> 10 -> 5
+    \end{verbatim}
+\end{Exercise}
+
+\begin{Answer}[ref={ex:flatten}]
+  	\lstinputlisting[style=cstylesmall]{src/flatten.c}
+\end{Answer}

@@ -1,0 +1,203 @@
+\documentclass[oneside]{scrbook}
+
+\input{../preamble.tex}
+\addtocounter{chapter}{6}
+
+\begin{document}
+\chapter{Funzioni}
+
+Questa dispensa propone esercizi sulla scrittura di algoritmi, in linguaggio C, utili alla comprensione della definizione e dell'utilizzo delle \textbf{funzioni}.
+
+Le funzioni sono blocchi di codice riutilizzabili che eseguono un compito specifico. Permettono di organizzare il programma in parti più piccole e gestibili (principio di \emph{modularità}), migliorando la leggibilità e riducendo la duplicazione del codice.
+
+Un programma C è composto da una o più funzioni; la funzione \texttt{main()} è obbligatoria ed è il punto di ingresso del programma.
+
+\section{Dichiarazione e Definizione}
+
+Per usare una funzione, di solito sono necessari due passaggi: la \textbf{dichiarazione} (prototipo) e la \textbf{definizione} (implementazione).
+
+\paragraph{Dichiarazione (Prototipo)}
+
+La dichiarazione, o prototipo, informa il compilatore sull'esistenza di una funzione, specificando il suo nome, il tipo di dato che restituisce (tipo di ritorno) e i tipi di dati che accetta come input (parametri).
+
+La sintassi è:
+\begin{lstlisting}[style=cstyle]
+tipo_ritorno nome_funzione(tipo_param1, tipo_param2, ...);
+\end{lstlisting}
+
+I prototipi si inseriscono tipicamente all'inizio del file, dopo gli \texttt{\#include}.
+
+\paragraph{Definizione}
+
+La definizione è il blocco di codice che costituisce la funzione vera e propria. Contiene le istruzioni che verranno eseguite quando la funzione è chiamata.
+
+La sintassi è:
+\begin{lstlisting}[style=cstyle]
+tipo_ritorno nome_funzione(tipo_param1 nome_param1, tipo_param2 nome_param2, ...) {
+    
+// Corpo della funzione
+    // ... istruzioni ...
+    
+    return valore_restituito; // Solo per funzioni non void
+}
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{\texttt{tipo\_ritorno}}: Il tipo di dato del valore che la funzione restituisce al chiamante. Se la funzione non restituisce nulla, si usa \texttt{void}.
+    \item \textbf{\texttt{nome\_funzione}}: Il nome della funzione.
+    \item Parametri: Le variabili (es. \texttt{nome\_param1}) che ricevono i valori passati alla funzione.
+    \item \textbf{\texttt{return}}: L'istruzione che termina la funzione e (se non \texttt{void}) restituisce un valore.
+\end{itemize}
+
+\section{Scope delle Variabili}
+
+Lo \emph{scope} (visibilità) di una variabile definisce dove nel programma essa può essere utilizzata. Ogni variabile esiste solo all'interno del suo scope.
+
+\begin{itemize}
+    \item \textbf{Variabili Locali}: Dichiarate all'interno di una funzione (inclusi i parametri). Sono visibili e utilizzabili \textbf{solo} all'interno di quella funzione. Vengono create quando la funzione inizia e distrutte (perdendo il loro valore) quando la funzione termina. Le variabili locali di una funzione (es. \texttt{main}) non sono visibili da un'altra funzione (es. \texttt{swap\_errato}).
+    \item \textbf{Variabili Globali}: Dichiarate all'esterno di qualsiasi funzione (di solito in cima al file). Sono visibili e modificabili da \textbf{qualsiasi} funzione nel file (dal punto di dichiarazione in poi). Il loro uso è generalmente sconsigliato perché rendono il programma difficile da comprendere e manutenere, creando dipendenze nascoste tra le funzioni.
+\end{itemize}
+
+
+\section{Passaggio dei Parametri}
+
+\paragraph{Passaggio per Valore}
+
+"Passare per valore" significa che, quando una funzione viene chiamata, il \textbf{valore} dell'argomento nel chiamante (es. \texttt{main}) viene \textbf{copiato} in una \emph{nuova} variabile: il parametro formale della funzione chiamata.
+
+La funzione lavora quindi esclusivamente su questa \textbf{copia locale}. Qualsiasi modifica fatta a questa copia \emph{all'interno} della funzione \textbf{non} ha alcun effetto sulla variabile originale nel chiamante.
+
+Ad esempio, un'operazione di scambio tra due varabili effettuata con il passaggio per valore non avrà effetto al di fuori della funzione:
+
+\begin{lstlisting}[style=cstyle]
+// 'a' e 'b' sono copie locali, esistono solo qui dentro.
+void swap_errato(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;
+    // Qui 'a' (la copia) e 'b' (la copia) sono state scambiate.
+    // Le variabili originali 'x' e 'y' del main non vengono toccate.
+}
+
+void main() {
+    int x = 10;
+    int y = 20;
+    
+    // Il valore di x (10) viene copiato in 'a'
+    // Il valore di y (20) viene copiato in 'b'
+    swap_errato(x, y);
+    
+    // Al termine di swap_errato, 'a' e 'b' vengono distrutte.
+    // 'x' e 'y' non sono mai state modificate.
+    // Il risultato della printf rimane ancora "10, 20"
+    printf("%d, %d", x, y); 
+}
+\end{lstlisting}
+
+\paragraph{Passaggio per Riferimento}
+
+Cosa fare se vogliamo che una funzione modifichi le variabili del chiamante? 
+Possiamo utilizzare \textbf{l'indirizzo di memoria} della variabile come parametro formale.
+
+Il meccanismo è sempre un passaggio "per valore", ma il valore che passiamo non è il valore della variabile (es. 10), ma il valore del suo indirizzo (es. 0x7FFF... ).
+
+\begin{itemize}
+    \item Nel chiamante (\texttt{main}): Usiamo l'operatore \texttt{\&} per ottenere l'indirizzo della variabile (es. \texttt{\&x}).
+    \item Nella funzione: Il parametro formale deve essere di tipo \textbf{puntatore} (dichiarato con \texttt{*}) per poter memorizzare un indirizzo.
+    \item Nella funzione: Per accedere o modificare il valore \emph{contenuto} a quell'indirizzo, usiamo l'operatore di "dereferenziazione" (\texttt{*}).
+\end{itemize}
+
+Possiamo ora effettuare uno scambio tra variabili che verrà propagato anche nel main:
+
+\begin{lstlisting}[style=cstyle]
+void swap(int *a, int *b) {
+    int temp;
+    
+    // *a significa "vai all'indirizzo contenuto in a"
+    // e prendi il valore (10).
+    temp = *a; 
+
+    // *b significa "vai all'indirizzo 'b' (a 'y')"
+    // e prendi il valore (20).
+    // *a = ... significa "vai all'indirizzo 'a' (a 'x') e
+    // scrivi il nuovo valore (20).
+    *a = *b;       
+    
+    // *b = ... significa "vai all'indirizzo 'b' (a 'y') e 
+    // scrivi il valore di temp (10).
+    *b = temp;       
+}
+
+void main() {
+    int x = 10;
+    int y = 20;
+    
+    // Passo l'indirizzo di x 
+    // Passo l'indirizzo di y 
+    swap(&x, &y); 
+    
+    // La funzione ha modificato direttamente i valori
+    // alle locazioni di memoria di x e y.
+    // Ora x vale 20 e y vale 10.
+    printf("%d, %d", x, y);
+}
+\end{lstlisting}
+
+\section{Funzioni Ricorsive}
+Le funzioni ricorsive sono funzioni che si richiamano direttamente o indirettamente. La ricorsione è utile per risolvere problemi che possono essere suddivisi in sottoproblemi simili. Per risolvere un problema attraverso la programmazione ricorsiva sono necessari alcuni elementi:
+\begin{itemize}
+    \item Caso base: caso elementare del problema che può essere
+    risolto immediatamente.
+    \item Passo ricorsivo: chiamata ricorsiva per risolvere uno o più problemi più semplici.
+    \item Costruzione della soluzione: costruzione della soluzione
+    sulla base del risultato delle chiamate ricorsive
+\end{itemize}
+Durante la costruzione di funzioni ricorsive è fondamentale aggiungere una condizione di terminazione che ci assicurerà che prima o poi la catena di chiamate a funzioni termini. 
+
+\textbf{Esempio:} Calcolo del Fattoriale. Il fattoriale di un numero \( n \) (\( n! \)) può essere calcolato ricorsivamente come:
+\[
+n! = 
+\begin{cases} 
+1 & \text{se } n = 0, \\
+n \cdot (n-1)! & \text{se } n > 0.
+\end{cases}
+\]
+\begin{lstlisting}[style=cstyle]
+int fattoriale(int n) {
+    if (n == 0)        // Caso base
+        return 1;
+    else               // Caso ricorsivo
+        return n * fattoriale(n - 1);
+}
+\end{lstlisting}
+
+
+
+\section{Esercizi}
+
+\input{ex/ex_operazioni.tex}
+\input{ex/ex_amici.tex}
+\input{ex/ex_numeri-perfetti.tex}
+\input{ex/ex_sequenza.tex}
+\input{ex/ex_ricerca.tex}
+\input{ex/ex_ripetizioni.tex}
+\input{ex/ex_rimuovi-stringa.tex}
+\input{ex/ex_shift-matrice.tex}
+
+%Riferimento
+\input{ex/ex_operazioni_rif.tex}
+\input{ex/ex_punto.tex}
+
+% Ricorsione
+\input{ex/ex_ricorsione_1.tex}
+\input{ex/ex_ricorsione_2.tex}
+\input{ex/ex_inverti_ric.tex}
+\input{ex/ex_hanoi.tex}
+
+% Complicati
+\input{ex/ex_triathlon.tex}
+
+\clearpage
+\section*{Soluzioni}
+\shipoutAnswer
+
+\end{document}

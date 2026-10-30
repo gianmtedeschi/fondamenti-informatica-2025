@@ -1,0 +1,20 @@
+\begin{Exercise}[label={ex:somma_overflow}]
+    Eseguire la somma binaria $A = (11011000)_{2}$ e $B = (01101101)_{2}$. Assumendo una rappresentazione a 8 bit per numeri naturali, verificare se si verifica un overflow.
+\end{Exercise}
+
+\begin{Answer}[ref={ex:somma_overflow}]
+    Si esegue la somma binaria:
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{ccccccccccc}
+            &      & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & \\
+            &      & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 &+\\
+            &      & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 1 &=\\
+            \hline
+            &(1)& 0 & 1 & 0 & 0 & 0 & 1 & 0 & 1 &\\
+    \end{tabular}
+    \end{table}
+    Il risultato è $S = (101000101)_{2}$.
+
+    Poiché la rappresentazione è a 8 bit e il bit di riporto finale ($c_9$) è $\mathbf{1}$, si verifica un \textbf{overflow}.
+\end{Answer}

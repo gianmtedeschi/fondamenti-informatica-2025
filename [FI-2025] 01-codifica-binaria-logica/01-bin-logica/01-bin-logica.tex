@@ -1,0 +1,536 @@
+\documentclass[oneside]{scrbook}
+% \documentclass{article}
+
+\input{../preamble.tex}
+\addtocounter{chapter}{0}
+
+\begin{document}
+
+\chapter{Rappresentazione dell'Informazione e Logica Booleana}
+
+
+\section{Rappresentazione dell'Informazione}
+
+\subsection{Sistemi di numerazione}
+Un numero può essere rappresentato in diverse \textbf{basi numeriche}.  
+La base $b$ determina il numero di simboli disponibili per rappresentare le cifre.  
+
+\begin{itemize}
+  \item \textbf{Base 2 (binaria)}: cifre $\{0,1\}$.
+  \item \textbf{Base 8 (ottale)}: cifre $\{0,1,\dots,7\}$.
+  \item \textbf{Base 10 (decimale)}: cifre $\{0,1,\dots,9\}$.
+  \item \textbf{Base 16 (esadecimale)}: cifre $\{0,1,\dots,9,A,B,C,D,E,F\}$.
+\end{itemize}
+
+Un numero $N$ in base $b$ si scrive come:
+\[
+N = a_{n-1}b^{n-1} + a_{n-2}b^{n-2} + ... + a_1 b + a_0
+\]
+dove $a_i$ è la cifra nella posizione $i$ ($0 \leq a_i < b$).
+
+\textbf{Esempio:}
+\[
+(1011)_2 = 1\cdot 2^3 + 0\cdot 2^2 + 1\cdot 2^1 + 1\cdot 2^0 = (11)_{10}
+\]
+
+\paragraph{Quante cifre servono in base $b$?}  
+Con $n$ cifre in base $b$ si possono rappresentare $b^n$ combinazioni diverse.  
+Se vogliamo rappresentare $N$ informazioni distinte, il numero minimo di cifre richiesto è:
+\[
+n \geq \lceil \log_b(N) \rceil
+\]
+
+\textbf{Esempi:}
+\begin{itemize}
+  \item Per rappresentare $100$ simboli diversi in base 2:  
+  $n \geq \lceil \log_2(100) \rceil = \lceil 6.64 \rceil = 7$.  
+  Servono quindi almeno 7 bit.
+  \item Per rappresentare $500$ simboli diversi in base 16:  
+  $n \geq \lceil \log_{16}(500) \rceil = \lceil 2.7 \rceil = 3$.  
+  Servono quindi 3 cifre esadecimali.
+\end{itemize}
+
+\subsection{Numeri Naturali}
+
+\subsubsection{Conversioni tra basi}
+\paragraph{Da decimale a base $b$}
+Si usa il metodo delle \textbf{divisioni successive}.
+\begin{enumerate}
+    \item Si divide il numero $N$ per la base $b$.
+    \item Si prosegue con le divisioni finchè non arrivo a quoziente $0$.
+    \item Si raccolgono i resti ($r$) dalle divisioni successive in ordine inverso rispetto a come sono stati ottenuti.
+    \item La sequenza di resti in base $b$ rappresenterà il numero $N$ nella codifica cercata.
+\end{enumerate}
+
+\textbf{Esempio:}  
+Convertire $45_{10}$ in binario:
+
+\begin{center}
+\begin{tabular}{r|r}
+    \multicolumn{2}{c}{2} \\
+    45 & 1 \\
+    22 & 0 \\
+    11 & 1 \\
+    5 & 1 \\
+    2 & 0 \\
+    1 & 1 \\
+    0 &
+\end{tabular}
+\end{center}
+
+I resti presi in ordine inverso rispetto a quello con cui vengono ottenuti danno come risultato: $45_{10} = 101101_2$.
+
+
+\paragraph{Da base $b$ a decimale}
+Si usa il metodo della \textbf{somma di prodotti}. Se un numero in base $b$ è
+$$
+    (a_n a_{n-1}...a_1 a_0)_b
+$$
+dove ogni cifra $a_i$ è compresa tra 0 e $b-1$, allora il valore decimale si calcola come
+$$
+    N_{10} = a_n \cdot b^n + a_{n-1} \cdot b^{n-1} +...+a_1 \cdot b^1 +a_0 \cdot b^0.
+$$
+Si andrà quindi a moltiplicare ogni cifra per una potenza della base corrispondente alla sua posizione sommando infine tutti i risultati ottenuti.
+
+\textbf{Esempio:}  
+$(253)_8 = 2\cdot 8^2 + 5\cdot 8^1 + 3\cdot 8^0 = 171_{10}$
+
+\paragraph{Conversioni tra basi potenze di 2}
+Entrambi i procedimenti esposti hanno validità generale e permettono la conversione da una qualsiasi base $b_i$ a $b_j$. Solitamente, il procedimento delle divisioni successive si utilizza per il passaggio da base 10 a una qualsiasi base $b$. Differentemente, il procedimento della somma di prodotti risulta immediato per la conversione da una qualsiasi base $b$ a base 10. Nel caso di conversioni in cui la base 10 non sia coinvolta è consuetudine effettuare un doppio passaggio, da una base generica a base 10 e da base 10 alla base desiderata. Questo passaggio intermedio attraverso la base 10 può essere omesso, quando si eﬀettua una conversione di base tra due basi tali che una è una potenza dell’altra. Passare dalla base 2 (binario) alla base 8 (ottale) o 16 (esadecimale) è particolarmente semplice, perché $8 = 2^3$ e $16 = 2^4$.  
+Questo significa che ogni cifra ottale corrisponde esattamente a un gruppo di 3 bit, e ogni cifra esadecimale corrisponde a un gruppo di 4 bit.
+
+\begin{enumerate}
+  \item Si parte dalla cifra meno significativa (a destra).
+  \item Si raggruppano i bit a blocchi di 3 (per l’ottale) o 4 (per l’esadecimale).
+  \item Se l’ultimo gruppo (quello più a sinistra) non è completo, si aggiungono zeri all’inizio per completarlo.
+  \item Si converte ciascun gruppo nella cifra corrispondente.
+\end{enumerate}
+
+\textbf{Esempio 1: da binario a ottale}  
+Convertire $(101101)_2$ in base 8.  
+\[
+(101101)_2 = (101)(101)_2
+\]  
+Ogni gruppo di 3 bit corrisponde a una cifra ottale:  
+$101_2 = 5_8$, $101_2 = 5_8$.  
+\[
+(101101)_2 = (55)_8
+\]
+
+\textbf{Esempio 2: da ottale a binario}  
+Convertire $(253)_8$ in base 2.  
+\[
+2 = 010_2, \quad 5 = 101_2, \quad 3 = 011_2
+\]  
+\[
+(253)_8 = (010101011)_2
+\]
+
+\subsection{Aritmetica Binaria}
+\subsubsection{Somma}
+L'operazione di somma è determinata da due elementi principali: il bit di \textbf{risultato} ed il bit di \textbf{resto} definiti come segue:
+\begin{center}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \textbf{risultato}
+        \[
+        \begin{array}{c|cc}
+             + & 0 & 1 \\
+            \hline
+            0 & 0 & 1 \\
+            1 & 1 & 0
+        \end{array}
+        \]
+    \end{minipage}%
+    %\hspace{0.1\textwidth}% Spazio tra le due tabelle
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \textbf{riporto}
+        \[
+        \begin{array}{c|cc}
+             + & 0 & 1 \\
+            \hline
+            0 & 0 & 0 \\
+            1 & 0 & 1
+        \end{array}
+        \]
+    \end{minipage}
+\end{center}
+Genericamente, dati due operandi di $n$ bit, $A = [a_{n-1}...a_1a_0]$ e $B = [b_{n-1}...b_1b_0]$ definiamo la somma come:
+
+\[
+\begin{array}{*7{c}c} 
+    c_{\,n} & c_{\,n-1} & \cdots & c_{\,3} & c_{\,2} & c_{\,1} & \phantom{a_0} & \\
+    \phantom{c_n} & a_{\,n-1} & \cdots & a_{\,3} & a_{\,2} & a_{\,1} & a_{\,0} & + \\
+    & b_{\,n-1} & \cdots & b_{\,3} & b_{\,2} & b_{\,1} & b_{\,0} & = \\
+    \cline{2-7}
+    \phantom{+} & s_{\,n-1} & \cdots & s_{\,3} & s_{\,2} & s_{\,1} & s_{\,0} &
+\end{array}
+\]
+
+Si noti come, nel caso in cui il bit di riporto $c_n = 1$, non è possibile rappresentare il risultato in $n$ bit. Questo fenomeno viene definito come \textbf{overflow}.
+
+\paragraph{Overflow}
+Due casi possibili dopo somma:
+\begin{enumerate}
+    \item Il risultato è rappresentabile con il numero di bit a disposizione, $c_n = 0$.
+    \item Il risultato non è rappresentabile con il numero di bit a disposizione, $c_n = 1$.
+\end{enumerate}
+
+\subsubsection{Sottrazione}
+L'operazione di sottrazione è determinata da due elementi principali: il bit di \textbf{risultato} ed il bit di \textbf{prestito} definiti come segue:
+\begin{center}
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \textbf{risultato}
+        \[
+        \begin{array}{c|cc}
+             - & 0 & 1 \\
+            \hline
+            0 & 0 & 1 \\
+            1 & 1 & 0
+        \end{array}
+        \]
+    \end{minipage}%
+    %\hspace{0.1\textwidth}% Spazio tra le due tabelle
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \textbf{prestito}
+        \[
+        \begin{array}{c|cc}
+             - & 0 & 1 \\
+            \hline
+            0 & 0 & 0 \\
+            1 & 1 & 0
+        \end{array}
+        \]
+    \end{minipage}
+\end{center}
+Genericamente, dati due operandi di $n$ bit, $A = [a_{n-1}...a_1a_0]$ e $B = [b_{n-1}...b_1b_0]$ definiamo la sottrazione come:
+
+\[
+\begin{array}{*7{c}c} 
+    p_{\,n} & p_{\,n-1} & \cdots & p_{\,3} & p_{\,2} & p_{\,1} & \phantom{a_0} & \\
+    \phantom{c_n} & a_{\,n-1} & \cdots & a_{\,3} & a_{\,2} & a_{\,1} & a_{\,0} & - \\
+    & b_{\,n-1} & \cdots & b_{\,3} & b_{\,2} & b_{\,1} & b_{\,0} & = \\
+    \cline{2-7}
+    \phantom{+} & s_{\,n-1} & \cdots & s_{\,3} & s_{\,2} & s_{\,1} & s_{\,0} &
+\end{array}
+\]
+
+Analogamente alla somma, in caso il bit di prestito $p_n = 1$ si verifica una situazione anomala definita come \textbf{underflow}.
+
+\subsection{Numeri Relativi}
+I numeri relativi (in base 2) possono essere codificati utlizzando diverse rappresentazioni: 
+\begin{enumerate}
+    \item Rappresentazione in modulo e segno.
+    \item Notazione in complemento a 2
+\end{enumerate}
+
+\subsubsection{Modulo e Segno}
+La rappresentazione in modulo e segno si basa sull'utilizzo di due elementi, \textbf{segno} e \textbf{valore}.
+In base 2 si utilizza:
+\begin{itemize}
+    \item 0 per indicare il segno positivo.
+    \item 1 per indicare in segno negativo. 
+\end{itemize}
+Il bit di segno occupa la posizione più significativa. Ovvero, dato un elemento $N = a_{n-1}a_{n-2}...a_1a_0$, il bit $a_{n-1}$ rappresenterà il segno, i restanti il valore assoluto. 
+
+\textbf{Esempio:}  
+Convertire $-14_{10}$ in binario modulo e segno:
+
+\begin{center}
+\begin{tabular}{r|r}
+    \multicolumn{2}{c}{2} \\
+    14 & 0 \\
+    7 & 1 \\
+    3 & 1 \\
+    1 & 1 \\
+    0
+\end{tabular}
+\end{center}
+
+Ricordandoci di aggiungere il bit di segno il risultato sarà: $-14_{10} = 11110_{2\text{MS}}$
+
+Utilizzando questo tipo di rappresentazione per convetire un numero $N$ avremo bisogno di $n = \lceil \log_b(|N| + 1) +1 \rceil$ bit. Ponendoci in binario (base 2) l'insieme dei valori rappresentabili è $[-(2^{n-1}-1), 2^{n-1}-1]$.
+
+\subsubsection{Complemento a 2}
+Il complemento a 2 consente di rappresentare numeri negativi in modo compatto, evitando di fornire due rappresentazioni diverse per lo zero e di conseguenza aumentando anche anche i valori rappresentabili. Con $n$ bit (in base 2) si possono infatti rappresentare i numeri nell’intervallo:
+\[
+[-2^{n-1}, \; 2^{n-1}-1]
+\]
+
+I domini di rappresentabilità possono essere definiti come:
+\begin{itemize}
+    \item Se $N \geq 0$, $n = \lceil \log_b(|N| + 1) +1 \rceil$
+    \item Se $N < 0$, $n = \lceil \log_b(|N|) +1 \rceil$
+\end{itemize}
+
+Per i numeri positivi si utilizza la stessa metodologia di conversione utilizzata per i numeri naturali, adattata al numero di bit corretto. 
+Per i numeri negativi si effettuano i seguenti passaggi:
+\begin{enumerate}
+  \item Scrivere il numero, in valore assoluto, in binario con $n$ bit.
+  \item Invertire tutti i bit (complemento a 1).
+  \item Aggiungere $1$.
+\end{enumerate}
+
+\textbf{Esempio:}  
+Convertire $-12_{10}$ in binario complemento a 2:
+Per rappresentare il valore serviranno $n = \lceil \log_2(|-12|) +1 \rceil = 5$ bit.
+\begin{center}
+\begin{tabular}{r|r}
+    \multicolumn{2}{c}{2} \\
+    12 & 0 \\
+    6 & 0 \\
+    3 & 1 \\
+    1 & 1 \\
+    0
+\end{tabular}
+\end{center}
+$|N| = 12_{10} = 01100_{2\text{C2}}$
+\begin{enumerate}
+    \item Inverto tutti i bit  $\xrightarrow[]{}10011$ (complemento a 1)
+    \item Sommo 1 $\xrightarrow[]{}10100$ (complemento a 2)
+\end{enumerate}
+Il risultato finale è $N = 10100_{2\text{C2}}$
+
+\paragraph{Somma e Overflow}
+Le somme (e sottrazioni) in complemento a 2 si eseguono normalmente in binario.  
+In alcuni casi, l’eventuale riporto non comporta una condizione di overflow e può essere ignorato mantenendo il risultato finale corretto.  
+
+\textbf{Esempio:}  
+$5 + (-5)$ su 8 bit:  
+\[
+00000101 + 11111011 = 1\;00000000
+\]
+Ignoro il riporto: $00000000 = 0$ 
+
+In generale, dati due operandi $a$ e $b$ distinguiamo:
+\begin{itemize}
+    \item $a>0$, $b>0$ $a+b< 0 \xrightarrow[]{}$ Overflow!
+    \item $a>0$, $b<0$ $a+b \xrightarrow[]{}$ Possiamo scartare il bit di carry (se necessario).
+    \item $a<0$, $b<0$ $a+b> 0 \xrightarrow[]{}$ Overflow! 
+\end{itemize}
+
+
+\subsection{Numeri Razionali}
+
+\subsubsection{Virgola fissa}
+La rappresentazione a virgola fissa riserva:
+\begin{itemize}
+  \item $n$ bit per la parte intera,
+  \item $k$ bit per la parte frazionaria.
+\end{itemize}
+
+Per effettuare la conversione di un numero frazionario in binario:
+\begin{itemize}
+    \item La parte intera si ottiene con il metodo delle divisioni successive.
+    \item La parte frazionaria si ottiene con il metodo delle \textbf{moltiplicazioni successive}.
+\end{itemize}
+Si moltiplica la parte frazionaria per 2 prendendo la parte intera (che sarà 0 o 1). Si rieffettua la stessa operazione sulla nuova parte frazionaria ottenuta dalla moltiplicazione. Il processo si ripete finchè non si raggiunge il numero massimo di bit riservati per la parte frazionaria o quando la parte frazionaria è 0.
+
+\textbf{Esempio: } Convertire $0.375_{10}$ in base 2 utilizzando la virgola fissa.
+
+$0.375 \cdot 2 = 0.75 \to 0$ \\ 
+$0.75 \cdot 2 = 1.5 \to 1$  \\
+$0.5 \cdot 2 = 1.0 \to 1$  \\
+
+Quindi $0.375 = 0.011_2$.
+
+
+\subsubsection{Virgola mobile (IEEE 754)}
+La virgola mobile ci permette di "spostare" la virgola a seconda del valore che vogliamo codificare.
+Il processo si divide in tre fasi: determinazione del \textbf{segno}, calcolo dell'\textbf{esponente} traslato e calcolo della \textbf{mantissa}.
+
+Utilizziamo come esempio il numero $N = +23.75$
+
+\textbf{Fase del segno (S)}: il primo bit è dedicato al segno, 0 se positivo 1 se negativo. Quindi, $S = 0$.
+
+\textbf{Fase di normalizzazione e mantissa (M)}: Il numero decimale (ignorando il segno) deve essere convertito in binario e poi scritto in notazione scientifica binaria normalizzata.
+\begin{itemize}
+    \item Si converte il numero decimale in binario come per la virgola fissa: 
+    
+    Parte intera $23_{10} = 10111$
+
+    Parte frazionaria $0.75$
+    
+    $0.75 \cdot 2 = 1.5 \to 1$  \\
+    $0.5 \cdot 2 = 1.0 \to 1$  \\
+    
+    $23.75_{10} = 10111.11_2$.
+    \item Normalizzazione: si sposta la virgola binaria fino a quando non si trova dopo il primo 1. Il numero di posizione in cui la virgola è stata spostata definisce l'\textbf{esponente effettivo}. Spostare la virgola significa moltiplicare piuttosto che dividere per una potenza di 2.
+
+    $E_{eff} = 4$.
+
+    Otteniamo così la mantissa implicita $1.011111$
+    \item La mantissa $M$ memorizzata è solo la parte frazionaria che segue il bit implicito (bit prima della virgola).
+
+    $M = 01111100000000000000000$ (23 bit)
+\end{itemize}
+
+\textbf{Fase dell'esponente traslato (E)}: Dato l'esponente effettivo possiamo ricavare l'esponente come:
+$$
+    E = E_{eff} + \text{Bias}
+$$
+$$
+    E = 4 + 127 = 131
+$$
+Si converte infine l'esponente in base 2:
+$$
+    131_{10} = 100000011_2
+$$
+
+Si conclude assemblando le 3 parti ricavate:
+$$
+    +23.75_{10} = 01000001101111100000000000000000_2
+$$
+
+\textbf{Nota: } L'esempio proposto segue lo standard IEEE 754 a singola precisone. Lo standard è caratterizzato da:
+\begin{itemize}
+    \item Singola precisione, $E = 8$ bit e $M = 23$ bit
+    \item Doppia precisione, $E= 11$ bit e $M=52$ bit
+\end{itemize}
+
+
+\textbf{Esempio:}  
+$-13.25_{10}$:
+\[
+13.25 = 1101.01_2 = 1.10101_2 \cdot 2^3
+\]
+\[
+S = 1, \quad E = 3+127 = 130 = 10000010_2
+\]
+\[
+M = 10101000000000000000000
+\]
+
+Risultato (32 bit):
+\[
+1 \; 10000010 \; 10101000000000000000000
+\]
+
+\clearpage
+
+\section{Logica Booleana}
+Un'espressione booleana descrive una condizione, ovvero un'istruzione che, quando valutata, risulta sempre in un valore pari a zero ($0$, falso) o uno ($1$, vero), determinata dagli operatori e dal valore delle costanti o variabili in essa contenute. Per comporre espressioni booleane complesse si utilizzano i seguenti operatori:
+
+\begin{description}
+\item[Operatori relazionali] valutano relazioni binarie tra i due operandi:
+  \begin{itemize}
+  \item [\texttt{<}] minore di
+  \item [\texttt{<=}] minore di o uguale uguale a
+  \item [\texttt{>}] maggiore di
+  \item [\texttt{>=}] maggiore di o uguale a
+  \item [\texttt{==}] uguale a
+  \item [\texttt{!=}] non uguale a (diverso)
+  \end{itemize}
+\item[Operatori booleani] valutano condizioni di verit\`a tra i due operandi
+  \begin{itemize}
+  \item [\texttt{\&\&}] AND (congiunzione logica)
+  \item [\texttt{||}] OR (disgiunzione logica)
+  \item [\texttt{!}] NOT (negazione logica)
+  \end{itemize}
+    N.B. Differentemente dalle operazioni AND e OR il NOT \`e un operatore unario, valutato quindi su singolo input.
+\end{description}
+
+Le espressioni logiche rispettano un ordine tra i propri operatori. In assenza di parentesi l'ordine è determinato come (elementi a priorità maggiore in alto):
+\begin{enumerate}
+    \item negazione (NOT) \texttt{!}
+    \item operatori di relazione \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}
+    \item uguaglianza \texttt{==}, disuguaglianza \texttt{!=},
+    \item congiunzione (AND) \texttt{\&\&}
+    \item disgiunzione (OR) \texttt{||}
+\end{enumerate}
+
+% \paragraph{Attenzione:} si osservi che in C (come in molti altri linguaggi), l'operazione di assegnamento \texttt{a = 3} \`e diversa dall'operazione di confronto \texttt{a == 3}. La prima \`e sempre valutata come vera ($1$, uno), mentre la seconda, ovviamente, dipende dal valore memorizzato in \texttt{a}. Perci\`o:
+% \lstinputlisting[style=cstyle]{src/assegnamento_vs_confronto.c}
+
+
+\textbf{Proprietà}: gli operatori \texttt{\&\&} (AND) e \texttt{||} (OR) sono commutativi:
+\begin{itemize}
+    \item a \texttt{\&\&} b == b \texttt{\&\&} a
+    \item a \texttt{||} b == b \texttt{||} a
+\end{itemize}
+Le doppie negazioni si elidono:
+\begin{itemize}
+    \item \texttt{!!}a == a
+\end{itemize}
+
+\subsection{Tabelle di Verità}
+Le tabelle di verit\`a sono uno strumento logico utilizzato per determinare la validit\`a di espressioni o proposizioni logiche. Esse mostrano tutte le possibili combinazioni di valori di verit\`a (vero o falso) delle variabili coinvolte, permettendo di valutare l'output di un'espressione logica in ciascun caso. La tabella \`e strutturata come segue (esempio in Tabella \ref{tab:logica}):
+\begin{itemize}
+    \item Una riga per ogni possibile assegnamento di valori logici alle variabili
+    \item Una colonna per ogni espressione che compone l\textquotesingle espressione data (inclusa la formula stessa)
+\end{itemize}
+\begin{table}[h!]
+\centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{\large Congiunzione (AND)}} \\
+        \hline
+        \textbf{A} & \textbf{B} & \textbf{A \&\& B} \\
+        \hline
+        0 & 0 & 0 \\
+        \hline
+        0 & 1 & 0 \\
+        \hline
+        1 & 0 & 0 \\
+        \hline
+        \rowcolor{yellow!30} 1 & 1 & 1 \\
+        \hline
+    \end{tabular}
+    \caption{Tabella di verit\`a per l'espressione logica A \texttt{\&\&} B}
+    \label{tab:logica}
+\end{table}
+
+\paragraph{Leggi di De Morgan:} illustrano come distribuire la negazione rispetto a \texttt{||} e \texttt{\&\&}:
+\begin{itemize}
+    \item \texttt{!}(a \texttt{\&\&} b) == !a \texttt{||} !b
+    \item \texttt{!}(a \texttt{||} b) == !a \texttt{\&\&} !b
+\end{itemize}
+
+\textbf{Esempio: }
+\begin{center}
+\begin{tabular}{@{}l@{}}
+\texttt{!((a >= 5) \&\& (a <= 10))} \\
+\texttt{!(a >= 5) || !(a <= 10)} \quad [De Morgan] \\
+\texttt{!!(a < 5) || !!(a > 10)} \quad [trasformazione disuguaglianze] \\
+\texttt{(a < 5) || (a > 10)} \quad [doppia negazione]
+\end{tabular}
+\end{center}
+Utilizzando De Morgan rendiamo l'espressione più leggibile. Avremo quindi in questo caso risultato vero se il valore di a è minore di 5 oppure maggiore di 10.
+% \subsection{Esercizi}
+
+% \input{ex/ex_tab_1} 
+% \input{ex/ex_implicazione}
+% \input{ex/ex_vacanza} %riscrivere
+% \input{ex/ex_logica} 
+% \input{ex/ex_espr_logica}
+% \input{ex/ex_cinema} %riscrivere
+
+\input{ex/ex_conv2_10}
+\input{ex/ex_conv10_2}
+\input{ex/ex_conv2_8}
+\input{ex/ex_conv2_16}
+
+\input{ex/ex_somma_bin}
+\input{ex/ex_somma_conv}
+\input{ex/ex_sottrazione}
+
+\input{ex/ex_modulo_segno}
+\input{ex/ex_complemento}
+
+\input{ex/ex_virgola_fissa}
+\input{ex/ex_virgola_mobile}
+
+\input{ex/ex_tab_1}
+% \input{01-bin-logica/ex/ex_logica}
+\input{ex/ex_espr_logica}
+\input{ex/ex_implicazione}
+\input{ex/ex_de_morgan}
+
+\clearpage
+\section*{Soluzioni}
+\shipoutAnswer
+
+\end{document}
