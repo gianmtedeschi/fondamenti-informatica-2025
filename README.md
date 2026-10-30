@@ -1,6 +1,6 @@
 # Fondamenti di Informatica 2025
 
-Material for the exercise sessions of *Fondamenti di Informatica* (Computer Science Fundamentals): handouts with exercises and their C solutions.
+Material for the exercise sessions of *Fondamenti di Informatica* - 082746. Exercise book with the respective C solutions.
 
 ## Structure
 
@@ -18,16 +18,3 @@ One folder per exercise session:
 | 08 | Linked lists |
 | 09 | Files and `argc`/`argv` |
 
-Inside each session folder:
-
-```
-[FI-2025] NN-topic/
-├── preamble.tex      # shared LaTeX preamble
-└── NN-topic/
-    ├── NN-topic.tex  # handout source
-    ├── NN-topic.pdf  # compiled handout
-    ├── ex/           # one .tex file per exercise
-    └── src/          # C solutions
-```
-
-To rebuild a handout, run `latexmk -pdf NN-topic.tex` from its folder.
