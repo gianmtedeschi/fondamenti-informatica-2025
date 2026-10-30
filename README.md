@@ -1,6 +1,7 @@
 # Fondamenti di Informatica 2025
 
-Material for the exercise sessions of *Fondamenti di Informatica* - 082746. Exercise book with the respective C solutions.
+Material for the exercise sessions of *Fondamenti di Informatica* (082746). Includes exercises with their solutions in C.
+
 
 ## Structure
 
